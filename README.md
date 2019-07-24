@@ -7,7 +7,7 @@
 The system is powered by a lightweight engine and provides a modern, responsive and efficient Web interface.
 
 ## [Wiki](https://github.com/CSOIreland/Client-API-Library/wiki)
-The Wiki centrally hosts all the technicall and business information about the system:
+The Wiki centrally hosts all the technicall and business information about the **Client API Library**:
 
 * [Client-API-Library](https://github.com/CSOIreland/Client-API-Library/wiki)
 
