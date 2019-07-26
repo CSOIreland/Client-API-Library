@@ -7,8 +7,6 @@ The **Client API Library** is a library of Javascript namespaced methods and CSS
 ## `root/`
 * `/bootstrap`
 * `/src`
-  * `/css`
-  * `/js`
 * `/test`
 
 ## `/bootstrap`
@@ -22,9 +20,6 @@ This is a basic template of a web-application based on the **Client API Library*
 
 ## [Wiki](https://github.com/CSOIreland/Client-API-Library/wiki)
 The Wiki centrally hosts all the technicall and business information about the **Client API Library**
-
-## [Questions](https://github.com/CSOIreland/Client-API-Library/issues/new/choose)
-Please raise a new [Issues](https://github.com/CSOIreland/Client-API-Library/issues/new/choose) in GitHub if you want to suggest an **Enhancement**, file a **Bug**, submit a **General Query** or report a **Security Vulnerability**.
 
 ## [Questions](https://github.com/CSOIreland/Client-API-Library/issues/new/choose)
 Please raise a new [Issue](https://github.com/CSOIreland/Client-API-Library/issues/new/choose) in GitHub if you want to file a **Bug**, suggest an **Enhancement**, report a **Security Vulnerability** or submit a **General Query**.
