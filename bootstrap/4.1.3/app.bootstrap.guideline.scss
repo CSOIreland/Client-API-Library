@@ -1,0 +1,137 @@
+/*!
+ * Bootstrap v4.1.3 (https" ://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https" ://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+ $theme-colors : (
+
+    // standard color palette
+    "blue" : #008FAA,
+    "indigo" : #6610f2,
+    "purple": #1D345C,
+    "pink": #B51E83,
+    "red": #DC4128,
+    "orange": #fd7e14,
+    "yellow": #FAA21B,
+    "green": #006168,
+    "teal": #45C1C0,
+    "cyan": #17a2b8,
+    "white": #fff,
+    "gray": #6c757d,
+    "gray-dark": #343a40,
+    
+    // functional color palette
+    "primary": #579599,
+    "secondary": #45C1C0,
+    "tertiary": #35456B,
+    "navbar": #006168,
+    "success": #28a745,
+    "info": #17a2b8,
+    "warning": #FAA21B,
+    "danger": #DC4128,
+    "light": #f8f9fa,
+    "dark": #343a40,
+    "neutral": #CDD3D9,
+
+    //color palette from brand guidelines
+    /*
+    "green-dark" : #004F50,
+    "green-100" : #006168,
+    "green-90" : #006F74,
+    "green-65" : #579599,
+    "green-40" : #9BBDBF,
+    "purple-dark" : #222944,
+    "purple-100" : #1D345C,
+    "purple-90" : #35456B,
+    "purple-65" : #6A7794,
+    "purple-40" : #A4A6BB,
+    "mint-dark" : #00AF86,
+    "mint-100" : #5BC1A5,
+    "mint-90" : #6AC5AD,
+    "mint-65" : #98D4C2,
+    "mint-40" : #C1E4D7,
+    "yellow-dark" : #E27F26,
+    "yellow-100" : #FAA21B,
+    "yellow-90" : #FBAA34,
+    "yellow-65" : #FDBF73,
+    "yellow-40" : #FED6A6,
+    "teal-dark" : #00B0AD,
+    "teal-100" : #45C1C0,
+    "teal-90" : #61C6C6,
+    "teal-65" : #95D5D5,
+    "teal-40" : #BCE4E3,
+    "pink-dark": #8E1F60,
+    "pink-100": #B51E83,
+    "pink-90": #C03E90,
+    "pink-65": #D477AC,
+    "pink-40": #E7ACCB,
+    "red-dark": #822729,
+    "red-100": #DC4128,
+    "red-90": #E25939,
+    "red-65": #EF876A,
+    "red-40": #FAB5A1,    
+    "cobalt-dark": #27337A,
+    "cobalt-100": #3C5DAA,
+    "cobalt-90": #566DB4,
+    "cobalt-65": #8591C8,
+    "cobalt-40": #B5BADE,
+    "lime-dark": #908C34,
+    "lime-100": #B7BE34,
+    "lime-90": #C3C53A,
+    "lime-65": #D7D574,
+    "lime-40": #E7E5A9,
+    "blue-dark": #006271,
+    "blue-100": #008FAA,
+    "blue-90": #0099B4,
+    "blue-65": #00B3C7,
+    "blue-40": #88D3DD
+    */
+  );
+
+  @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,300italic,400italic,700,700italic);/*main font used throughout website*/
+
+  $font-family-sans-serif:      'Roboto Sans', sans-serif;
+  $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+  $font-family-base:            $font-family-sans-serif !default;
+  $headings-font-family:        'Roboto Slab', sans-serif;
+
+  
+
+ @import "functions";
+ @import "variables";
+ @import "mixins";
+ @import "root";
+ @import "reboot";
+ @import "type";
+ @import "images";
+ @import "code";
+ @import "grid";
+ @import "tables";
+ @import "forms";
+ @import "buttons";
+ @import "transitions";
+ @import "dropdown";
+ @import "button-group";
+ @import "input-group";
+ @import "custom-forms";
+ @import "nav";
+ @import "navbar";
+ @import "card";
+ @import "breadcrumb";
+ @import "pagination";
+ @import "badge";
+ @import "jumbotron";
+ @import "alert";
+ @import "progress";
+ @import "media";
+ @import "list-group";
+ @import "close";
+ @import "modal";
+ @import "tooltip";
+ @import "popover";
+ @import "carousel";
+ @import "utilities";
+ @import "print";
+ 

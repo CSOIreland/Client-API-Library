@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- **************************************************************************** -->
+    <!-- Title -->
+    <!-- **************************************************************************** -->
+
+    <title>Template</title>
+
+    <!-- **************************************************************************** -->
+    <!-- Meta -->
+    <!-- **************************************************************************** -->
+
+    <meta charset="UTF-16">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Favicons - https://realfavicongenerator.net -->
+    <link rel="apple-touch-icon" sizes="180x180" href="image/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="image/favicon/favicon-16x16.png">
+    <link rel="manifest" href="image/favicon/site.webmanifest">
+    <link rel="mask-icon" href="image/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="image/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="image/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- **************************************************************************** -->
+    <!-- Resources -->
+    <!-- **************************************************************************** -->
+
+    <!-- CSS file for Roboto font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!--Font-awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- JQuery 3.X - https://jquery.com -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Datatables - https://datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <!-- Datatables Buttons - https://datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+    <!-- Datatables Responsive - https://datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <!-- Moment - https://momentjs.com -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.min.js"></script>
+
+    <!-- Datetime for Moment - https://datatables.net/plug-ins/sorting/datetime-moment -->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
+
+    <!-- Highcharts/Highmaps - https://www.highcharts.com -->
+    <link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+    <!-- JQuery Validate - https://jqueryvalidation.org/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+
+    <!-- JSON-Stat - https://json-stat.com/ -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/json-stat/0.13.3/json-stat.min.js"></script>
+
+
+    <!-- **************************************************************************** -->
+    <!-- Resources - API -->
+    <!-- **************************************************************************** -->
+
+    <!-- API - Dependency -Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+
+    <!-- API - Dependency - Bootstrap https://getbootstrap.com -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- API - Dependency - Typeahead https://cdnjs.com/libraries/typeahead.js-bootstrap-css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js-bootstrap-css/1.2.1/typeaheadjs.min.css">
+    <!-- API - Dependency - Typeahead https://cdnjs.com/libraries/bootstrap-3-typeahead -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+    <!-- API - Dependency - URI.js - https://github.com/medialize/URI.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
+
+
+    <!-- API - Constant -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/api.constant.min.js"></script>
+
+    <!-- API - Configuration -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/api.config.min.js"></script>
+
+    <!-- API - Library -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/api.library.min.js"></script>
+
+    <!-- API - Plugin -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/css/api.plugin.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/api.plugin.min.js"></script>
+
+    <!-- API - Plugin - Drag n Drop -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/css/api.plugin.dragndrop.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@3.0.0/js/api.plugin.dragndrop.min.js"></script>
+
+    <!-- **************************************************************************** -->
+    <!-- Resources - Application -->
+    <!-- **************************************************************************** -->
+
+    <!-- Add CSS resources as you need -->
+    <link rel="stylesheet" href="css/app.bootstrap.guideline.css">
+    <link rel="stylesheet" href="css/app.bootstrap.override.css">
+    <link rel="stylesheet" href="css/app.library.css">
+    <link rel="stylesheet" href="css/app.media.css">
+
+    <!-- Add JS resources as you need -->
+    <script src="js/app.constant.js"></script>
+    <script src="js/app.config.js"></script>
+    <script src="js/app.global.js"></script>
+    <script src="js/app.plugin.js"></script>
+    <script src="js/app.library.js"></script>
+
+</head>
+
+<!-- **************************************************************************** -->
+<!-- Body -->
+<!-- **************************************************************************** -->
+
+<body>
+
+    <!-- API - Plugin - Return To Top -->
+    <a href="#" id="return-to-top">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+
+    <div id="header"></div>
+
+    <div id="navigation"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="body" class="col-sm-8 p-0"></div>
+            <div class="col-sm-4 p-0">
+                <div id="notice"></div>
+                <div id="panel"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <div id="spinner"></div>
+
+    <div id="modal"></div>
+
+    <!-- JS file for Index page-->
+    <script src="index.js"></script>
+
+</body>
+
+</html>

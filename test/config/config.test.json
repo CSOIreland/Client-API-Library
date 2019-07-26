@@ -1,0 +1,33 @@
+{
+	"title": "Title [Test]",
+	"url": {
+		"api": {
+			"public": "https://test-domain.extension/public/api.jsonrpc",
+			"private": "https://test-domain.extension/private/api.jsonrpc"
+		},
+		"header": {
+			"logo": {
+				"alt": "YOUR LOGO HERE",
+				"src": "image/logo.png"
+			}
+		},
+		"footer": [
+			{
+				"text": "Home",
+				"href": "https://domain.extension"
+			},
+			{
+				"text": "Contact Us",
+				"href": "https://domain.extension/contactus"
+			},
+			{
+				"text": "Privacy",
+				"href": "https://domain.extension/privacy"
+			},
+			{
+				"text": "Copyright",
+				"href": "https://domain.extension/copyright"
+			}
+		]
+	}
+}

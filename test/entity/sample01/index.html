@@ -1,0 +1,43 @@
+<div class="card m-3">
+    <div class="card-header bg-primary text-light">
+        Sample 01
+    </div>
+    <div class="card-body">
+        <p class="card-text">Some quick example dd text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+
+<form id="upload-form">
+    <div class="card m-3">
+        <div class="card-header bg-primary text-light">Upload Data</div>
+        <div class="card-body">
+            <div class="box">
+                <input hidden="true" type="file" name="upload-files[]" class="box__file" />
+                <div class="box__input2">
+                    <label class="box__input3" for="upload-data-file">
+                        <i class="fas fa-upload fa-2x"></i>
+                        <span id="upload-filename"></span>
+                        <span id="upload-filetip">
+                            <strong>Choose a file</strong>
+                            <span class="box__dragndrop"> or drag it here.</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <span class="serverValidationError text-danger" name="upload-file-error-holder" id="upload-file-error-holder"></span>
+        </div>
+        <div class="card-footer text-right">
+            <button id="upload-btn-cancel" type="button" class="btn btn-neutral">
+                <i class="fas fa-ban"></i> Cancel</button>
+            <button id="upload-btn-upload" class="btn btn-primary text-light">
+                <i class="far fa-save"></i>
+                Upload
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Page specific CSS -->
+<link rel="stylesheet" href="entity/sample01/css/sample01.css">
+<!-- Page specific JS -->
+<script src="entity/sample01/js/sample01.js"></script>

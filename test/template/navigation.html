@@ -1,0 +1,40 @@
+<div class="container-fullwidth">
+    <nav class="navbar navbar-expand-xl navbar-dark bg-navbar nav-pills">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item pl-3">
+                    <a id="nav-link-sample01" class="nav-link active" href="#">Sample 01</a>
+                </li>
+                <li class="nav-item pl-3">
+                    <a id="nav-link-sampledisabled" class="nav-link disabled" href="#">Sample Disabled</a>
+                </li>
+                <li class="nav-item pl-3 dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="nav-link-menu01" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="nav-link-menu01">
+                        <a id="nav-link-sample02" class="dropdown-item " href="#">Sample 02</a>
+                        <a id="nav-link-sample03" class="dropdown-item" href="#">Sample 03</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Other links...</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="nav-link navbar-text text-light" href="#">
+                Firstname Surname [ <span class="text-secondary">username</span> ]
+            </a>
+            <i id="nav-loader" class="fas fa-spinner fa-lg text-navbar navbar-text"></i>
+        </div>
+    </nav>
+</div>
+
+<!-- CSS file for Navigation page-->
+<link rel="stylesheet" href="template/css/navigation.css">
+<!-- JS file for Navigation page-->
+<script src="template/js/navigation.js"></script>
