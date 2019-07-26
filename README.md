@@ -11,8 +11,8 @@ The Wiki centrally hosts all the technicall and business information about the *
 
 * [Client-API-Library](https://github.com/CSOIreland/Client-API-Library/wiki)
 
-## [Issues](https://github.com/CSOIreland/Client-API-Library/issues/new/choose)
-Please raise a new Issue in GitHub if you wan to suggest an **Enhancement**, file a **Bug**, submit a **General Query** or report a **Security Vulnerability**.
+## [Questions](https://github.com/CSOIreland/Client-API-Library/issues/new/choose)
+Please raise a new [Issues](https://github.com/CSOIreland/Client-API-Library/issues/new/choose) in GitHub if you wan to suggest an **Enhancement**, file a **Bug**, submit a **General Query** or report a **Security Vulnerability**.
 
 ***
 <img src="https://user-images.githubusercontent.com/5030226/60980383-47ccbf80-a32c-11e9-8572-3c234abcd9fb.png" Title="CSO" alt="CSO" width="24"> [Central Statistics Office, Ireland](https://www.cso.ie/)   
