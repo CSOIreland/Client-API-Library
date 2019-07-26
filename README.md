@@ -4,20 +4,6 @@
 # Client API Library
 The **Client API Library** is a library of Javascript namespaced methods and CSS stylesheets based on [JQuery](https://jquery.com/) and [Bootstrap](https://getbootstrap.com/).
 
-## `root/`
-* `/bootstrap`
-* `/src`
-* `/test`
-
-## `/bootstrap`
-This folder contains the Bootstrap version used to compile the **SCSS** file `app.bootstrap.guideline.scss` into the homonymous **CSS** stylesheet `app.bootstrap.guideline.css` that can be imported into any derived application.
-
-## `/src`
-This folder contains the JS and CSS source code of the library.  
-
-## `/test`
-This is a basic template of a web-application based on the **Client API Library** that can be used to either test the present library or as a canvas to start a new project.  
-
 ## [Wiki](https://github.com/CSOIreland/Client-API-Library/wiki)
 The Wiki centrally hosts all the technicall and business information about the **Client API Library**
 
