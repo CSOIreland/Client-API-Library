@@ -12,6 +12,7 @@ The Wiki centrally hosts all the technicall and business information about the *
 * [CSS](https://github.com/CSOIreland/Client-API-Library/wiki/CSS)
 * [JS](https://github.com/CSOIreland/Client-API-Library/wiki/JS)
 * [Test](https://github.com/CSOIreland/Client-API-Library/wiki/Test)
+* [Release notes](https://github.com/CSOIreland/Client-API-Library/wiki)
 
 ## [Questions](https://github.com/CSOIreland/Client-API-Library/issues/new/choose)
 Please raise a new [Issue](https://github.com/CSOIreland/Client-API-Library/issues/new/choose) in GitHub if you want to file a **Bug**, suggest an **Enhancement**, report a **Security Vulnerability** or submit a **General Query**.
