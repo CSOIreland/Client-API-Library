@@ -239,19 +239,20 @@ api.ajax.callback = function (pFunction, pResponse, pParams) {
 }
 
 /**
- * Load the config/config.json in the application 
- * Javascript ajax must be used because the configuration must load synchronously before the JQuery $(document).ready
+ * Load a configuration file
+ * Use Javascript rather than JQuery because the configuration must load synchronously before $(document).ready
+ * @param {*} url
  * @param {*} callback
  */
-api.ajax.config = function (callback) {
+api.ajax.config = function (url, callback) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', 'config/config.json', false);
+  xobj.open('GET', url, false);
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
       callback(xobj.responseText);
     } else {
-      alert("Internal Error: the configuration file \"config.json\" is missing or invalid.");
+      alert("Internal Error: the configuration file \"" + url + "\" is missing or invalid.");
     }
   };
   xobj.send(null);
