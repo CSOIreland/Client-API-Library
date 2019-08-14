@@ -252,7 +252,7 @@ api.ajax.config = function (url, callback) {
     if (xobj.readyState == 4 && xobj.status == "200") {
       callback(xobj.responseText);
     } else {
-      alert("Internal Error: the configuration file \"" + url + "\" is missing or invalid.");
+      console.log("Internal Error: the configuration file \"" + url + "\" is missing or invalid.");
     }
   };
   xobj.send(null);
