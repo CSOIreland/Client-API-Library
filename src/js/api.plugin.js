@@ -8,33 +8,6 @@ var api = api || {};
 api.plugin = api.plugin || {};
 
 /*******************************************************************************
-API - Plugin - Cookie consent
-*******************************************************************************/
-
-$(document).ready(function () {
-	window.cookieconsent.initialise({
-		"palette": {
-			"popup": {
-				"background": "#45c1c0",
-				"text": "#ffffff"
-			},
-			"button": {
-				"background": "#006f74",
-				"text": "#ffffff"
-			}
-		},
-		"position": "top",
-		"static": true,
-		"content": {
-			"message": "This website uses cookies. By browsing this website, you agree to our use of cookies.",
-			"dismiss": "Close",
-			"link": "More info",
-			"href": "http://www.cso.ie/en/privacystatement/"
-		}
-	})
-});
-
-/*******************************************************************************
 API - Plugin - Return To Top
 *******************************************************************************/
 
