@@ -19,10 +19,6 @@
 			{
 				"text": "Privacy",
 				"href": "https://domain.extension/privacy"
-			},
-			{
-				"text": "Copyright",
-				"href": "https://domain.extension/copyright"
 			}
 		]
 	},
