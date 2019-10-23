@@ -75,7 +75,7 @@ api.spinner.progress.setTimeout = function () {
   // Add an incremental safety margin
   api.spinner.progress.timeout = Math.ceil(api.spinner.progress.timeout + api.spinner.progress.timeout / 100 * 0.5);
 
-  app.upload.progress.instance = setTimeout(function () {
+  api.spinner.progress.instance = setTimeout(function () {
     // Never display 100% as it may need longer than expected to complete
     var percentage = Math.min(parseInt($(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").attr('aria-valuenow')) + 1, 99);
     $(C_API_SELECTOR_SPINNER + " .progress").show();
