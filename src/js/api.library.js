@@ -33,8 +33,19 @@ api.spinner.stop = function () {
   }
 
   if (!api.spinner.count) {
-    $(C_API_SELECTOR_SPINNER).fadeOut('slow');
-    api.spinner.progress.stop();
+    if (api.spinner.progress.instance) {
+      // End the progress bar
+      api.spinner.progress.stop();
+
+      // Close the spinner after 1 second to show 100% in the progress bar
+      setTimeout(function () {
+        $(C_API_SELECTOR_SPINNER).fadeOut('slow');
+      }, 1000);
+    }
+    else {
+      // Close the spinner immediatelly
+      $(C_API_SELECTOR_SPINNER).fadeOut('slow');
+    }
   }
 };
 
@@ -43,8 +54,17 @@ api.spinner.stop = function () {
  */
 api.spinner.progress.start = function (progressTimeout) {
   if (progressTimeout) {
-    api.spinner.progress.stop();
+    clearTimeout(api.spinner.progress.instance);
+
+    // Set progress timeout
     api.spinner.progress.timeout = progressTimeout;
+
+    // Set progress to 0%
+    $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '0%').attr('aria-valuenow', 0);
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("0%");
+
+    // Initiate the progress by setting the timeout
     api.spinner.progress.setTimeout();
   }
 };
@@ -54,9 +74,11 @@ api.spinner.progress.start = function (progressTimeout) {
  */
 api.spinner.progress.stop = function () {
   clearTimeout(api.spinner.progress.instance);
+
+  // Set progress to 100%
   $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
-  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '0%').attr('aria-valuenow', 0);
-  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("0%");
+  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '100%').attr('aria-valuenow', 100);
+  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("100%");
 };
 
 /**
