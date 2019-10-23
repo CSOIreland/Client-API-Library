@@ -4,13 +4,15 @@ API - Library
 // Init & Set
 var api = api || {};
 
-//#region API - Library - Spinner
-
 /*******************************************************************************
 API - Library - Spinner
 *******************************************************************************/
 api.spinner = {};
 api.spinner.count = 0;
+
+api.spinner.progress = {};
+api.spinner.progress.instance = null;
+api.spinner.progress.timeout = 0;
 
 /**
  * Show the Overlay and start the Spinner
@@ -19,7 +21,7 @@ api.spinner.start = function () {
   if (!api.spinner.count++) {
     $(C_API_SELECTOR_SPINNER).show();
   }
-}
+};
 
 /**
  * Hide the Overlay and stop the Spinner
@@ -32,10 +34,57 @@ api.spinner.stop = function () {
 
   if (!api.spinner.count) {
     $(C_API_SELECTOR_SPINNER).fadeOut('slow');
+    api.spinner.progress.stop();
   }
-}
+};
 
-//#endregion
+/**
+ *  Start the iterative Timeout method for the progress bar
+ */
+api.spinner.progress.start = function (progressTimeout) {
+  if (progressTimeout) {
+    api.spinner.progress.stop();
+    api.spinner.progress.timeout = progressTimeout;
+    api.spinner.progress.setTimeout();
+  }
+};
+
+/**
+ *  Stop the iterative Timeout method for the progress bar
+ */
+api.spinner.progress.stop = function () {
+  clearTimeout(api.spinner.progress.instance);
+  $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
+  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '0%').attr('aria-valuenow', 0);
+  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("0%");
+};
+
+/**
+ * Get the (expected) timeout for the progress bar
+ */
+api.spinner.progress.getTimeout = function (unitsToProcess, unitsPerSecond) {
+  var timeout = unitsToProcess / unitsPerSecond; // Get the total time in seconds
+  timeout = timeout / 100 * 1 * 1000; // Get 1% of the time in mseconds
+  return timeout;
+};
+
+/**
+ *  Set the iterative Timeout method for the progress bar
+ */
+api.spinner.progress.setTimeout = function () {
+  // Add an incremental safety margin
+  api.spinner.progress.timeout = Math.ceil(api.spinner.progress.timeout + api.spinner.progress.timeout / 100 * 0.5);
+
+  app.upload.progress.instance = setTimeout(function () {
+    // Never display 100% as it may need longer than expected to complete
+    var percentage = Math.min(parseInt($(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").attr('aria-valuenow')) + 1, 99);
+    $(C_API_SELECTOR_SPINNER + " .progress").show();
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', percentage + '%').attr('aria-valuenow', percentage);
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text(percentage + "%");
+    // Loop in 
+    api.spinner.progress.setTimeout();
+  }, api.spinner.progress.timeout);
+};
 
 /*******************************************************************************
 API - Library - Content
@@ -49,7 +98,7 @@ api.content.params = {};
  */
 api.content.getParam = function (pKey) {
   return api.content.params[pKey];
-}
+};
 
 /**
  * Load a Relative URL into a Container
@@ -81,7 +130,7 @@ api.content.load = function (pSelectorContainer, pRelativeURL, pParams) {
       });
     }
   });
-}
+};
 
 /**
  * Navigate to a Relative URL by Selector
@@ -128,7 +177,7 @@ api.content.navigate = function (pNavSelector, pRelativeURL, pNav_link_SelectorT
       $(pNav_menu_SelectorToHighlight).addClass("active");
     }
   });
-}
+};
 
 /**
  * Go to a Relative URL by Parameters
@@ -177,7 +226,7 @@ api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_m
     // "active" is a Bootstrap property
     $(pNav_menu_SelectorToHighlight).addClass("active");
   }
-}
+};
 
 /*******************************************************************************
 API - Library - Ajax
@@ -236,7 +285,7 @@ api.ajax.callback = function (pFunction, pResponse, pParams) {
   }
 
   return false;
-}
+};
 
 /**
  * Load a configuration file
@@ -256,7 +305,7 @@ api.ajax.config = function (url, callback) {
     }
   };
   xobj.send(null);
-}
+};
 
 /*******************************************************************************
 API - Library - Ajax - JSON-RPC
@@ -364,7 +413,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     api.modal.exception("Ajax Error. Please try again or contact the Administrator if the problem persists.");
     return false;
   }
-}
+};
 
 /*******************************************************************************
 API - Library - Modal
@@ -464,7 +513,7 @@ api.uri = {};
 api.uri.parse = function (pURL) {
   var URI = new URI(pURL);
   return URI.parseQuery(uri.search());
-}
+};
 
 /**
  * Check if a GET parameter is set in the URL
@@ -483,7 +532,7 @@ api.uri.isParam = function (pParam, pURL) {
     return true;
   else
     return false;
-}
+};
 
 /**
  * Return the GET parameter set in the URL
@@ -502,32 +551,32 @@ api.uri.getParam = function (pParam, pURL) {
     return paramsURL[pParam];
   else
     return false;
-}
+};
 
 /**
  * Check if the No Header request exists
  */
 api.uri.getNoHeader = function () {
   return api.uri.isParam(C_API_URI_NOHEADER);
-}
+};
 
 /**
  * Check if the No Navigation Bar request exists
  */
 api.uri.getNoNavbar = function () {
   return api.uri.isParam(C_API_URI_NONAVBAR);
-}
+};
 
 /**
  * Check if the No Footer request exists
  */
 api.uri.getNoFooter = function () {
   return api.uri.isParam(C_API_URI_NOFOOTER);
-}
+};
 
 /**
  * Get the Body request
  */
 api.uri.getBody = function () {
   return api.uri.getParam(C_API_URI_BODY);
-}
+};

@@ -19,9 +19,14 @@
 			{
 				"text": "Privacy",
 				"href": "https://domain.extension/privacy"
+			},
+			{
+				"text": "Copyright",
+				"href": "https://domain.extension/copyright"
 			}
 		]
 	},
+	"plugin": {
 	"cookieConsent": {
 		"palette": {
 			"popup": {
@@ -40,6 +45,7 @@
 			"dismiss": "Close",
 			"link": "More info",
 			"href": "https://domain.extension/privacy"
+			}
 		}
 	}
 }

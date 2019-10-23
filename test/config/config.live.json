@@ -26,6 +26,7 @@
 			}
 		]
 	},
+	"plugin": {
 	"cookieConsent": {
 		"palette": {
 			"popup": {
@@ -44,6 +45,7 @@
 			"dismiss": "Close",
 			"link": "More info",
 			"href": "https://domain.extension/privacy"
+			}
 		}
 	}
 }

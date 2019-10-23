@@ -10,7 +10,7 @@ var app = app || {};
 app.config = {};
 
 // Load the config.json into the application
-api.ajax.config(function (config) {
+api.ajax.config("config/config.json", function (config) {
     // Parse JSON string into object
     app.config = JSON.parse(config);
 });

@@ -1,5 +1,8 @@
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
   color: #fff;
   background-color: #00ada8;
+}
+
+.progress {
+  height: 40px;
 }
