@@ -60,9 +60,9 @@ api.spinner.progress.start = function (progressTimeout) {
     api.spinner.progress.timeout = progressTimeout;
 
     // Set progress to 0%
-    $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '0%').attr('aria-valuenow', 0);
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("0%");
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '1%').attr('aria-valuenow', 1);
+    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("1%");
+    $(C_API_SELECTOR_SPINNER + " .progress").show();
 
     // Initiate the progress by setting the timeout
     api.spinner.progress.setTimeout();
@@ -76,9 +76,9 @@ api.spinner.progress.stop = function () {
   clearTimeout(api.spinner.progress.instance);
 
   // Set progress to 100%
-  $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
   $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '100%').attr('aria-valuenow', 100);
   $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("100%");
+  $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
 };
 
 /**
@@ -100,7 +100,6 @@ api.spinner.progress.setTimeout = function () {
   api.spinner.progress.instance = setTimeout(function () {
     // Never display 100% as it may need longer than expected to complete
     var percentage = Math.min(parseInt($(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").attr('aria-valuenow')) + 1, 99);
-    $(C_API_SELECTOR_SPINNER + " .progress").show();
     $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', percentage + '%').attr('aria-valuenow', percentage);
     $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text(percentage + "%");
     // Loop in 
