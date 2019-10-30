@@ -7,14 +7,14 @@
 		},
 		"header": {
 			"logo": {
-				"alt": "YOUR LOGO HERE",
-				"src": "image/logo.png"
+				"alt": "Central Statistics Office, Ireland",
+				"src": "https://cdn.cso.ie/static/img/cso_logo.png"
 			}
 		},
 		"footer": [
 			{
-				"text": "Home",
-				"href": "https://domain.extension"
+				"text": "CSO.ie",
+				"href": "https://www.cso.ie"
 			},
 			{
 				"text": "Privacy",
