@@ -262,6 +262,7 @@ api.ajax = {};
  */
 api.ajax.callback = function (pFunction, pResponse, pParams) {
   // Default parameters
+  pResponse = pResponse || null;
   pParams = pParams || {};
 
   // Context is windows in a browser
@@ -394,7 +395,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     },
     error: function (jqXHR, textStatus, errorThrown) {
       if (callbackFunctionName_onError) {
-        api.ajax.callback(callbackFunctionName_onError, response, callbackParams_onError);
+        api.ajax.callback(callbackFunctionName_onError, null, callbackParams_onError);
       }
       else if (errorThrown == "Unauthorized") {
         // Silent response when unauthorized authentication
