@@ -388,10 +388,49 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
       // Validate the JSON-RPC Call ID
       if (pAJAX_Params.dataType == 'json' && response.id != callID) {
         // Pop the exception in the Bootstrap Modal
-        api.modal.exception("Invalid JSON-RPC Identifier");
-      } else if (callbackFunctionName_onSuccess)
-        api.ajax.callback(callbackFunctionName_onSuccess, response, callbackParams_onSuccess);
+        api.modal.exception("An invalid JSON-RPC Identifier has been detected. Please try again.");
+        return;
+      }
 
+      if (response.error) {
+        // Init the erro output
+        var errorOutput = null;
+
+        // Check response.error.data exist
+        if (response.error.data) {
+          // Format the structured data, either array or object
+          if (($.isArray(response.error.data) && response.error.data.length)
+            || ($.isPlainObject(response.error.data) && !$.isEmptyObject(response.error.data))) {
+            errorOutput = $("<ul>", {
+              class: "list-group"
+            });
+            $.each(response.error.data, function (_index, value) {
+              var error = $("<li>", {
+                class: "list-group-item",
+                html: value.toString()
+              });
+              errorOutput.append(error);
+            });
+          } else
+            // Plain error
+            errorOutput = response.error.data;
+        } else {
+          // Get the simple message otherwise
+          errorOutput = response.error.message;
+        }
+
+        // Pop the error in the Bootstrap Modal
+        api.modal.error(errorOutput);
+
+        if (callbackFunctionName_onError) {
+          api.ajax.callback(callbackFunctionName_onError, response.error, callbackParams_onError);
+        }
+      } else if (response.result !== undefined) {
+        // Check if the response.result property exist
+        if (callbackFunctionName_onSuccess)
+          api.ajax.callback(callbackFunctionName_onSuccess, response.result, callbackParams_onSuccess);
+      }
+      else api.modal.exception("An unexpected error has occurred. Please try again.");
     },
     error: function (jqXHR, textStatus, errorThrown) {
       if (callbackFunctionName_onError) {
@@ -402,7 +441,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
       }
       else {
         // Pop the exception in the Bootstrap Modal
-        api.modal.exception("Server or Network Error. Please try again or contact the Administrator if the problem persists.");
+        api.modal.exception("A Server or Network Error has occurred. Please try again.");
       }
     },
     complete: function () {
@@ -432,7 +471,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     return $.ajax(extendedAJAXParams);
   } catch (error) {
     // Pop the exception in the Bootstrap Modal
-    api.modal.exception("Ajax Error. Please try again or contact the Administrator if the problem persists.");
+    api.modal.exception("An unhandled Ajax exception has occurred. Please try again.");
     return false;
   }
 };
