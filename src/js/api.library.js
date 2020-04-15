@@ -126,10 +126,12 @@ api.content.getParam = function (pKey) {
  * @param {*} pSelectorContainer 
  * @param {*} pRelativeURL 
  * @param {*} pParams 
+ * @param {*} pAppend 
  */
-api.content.load = function (pSelectorContainer, pRelativeURL, pParams) {
+api.content.load = function (pSelectorContainer, pRelativeURL, pParams, pAppend) {
   // Default parameters
   pParams = pParams || {};
+  pAppend = pAppend || false;
 
   // Validate the Relative URL
   var uri = new URI(pRelativeURL);
@@ -146,9 +148,14 @@ api.content.load = function (pSelectorContainer, pRelativeURL, pParams) {
     async: false,
     success: function (response) {
       api.content.params = pParams;
-      $(pSelectorContainer).empty().html(response).promise().done(function () {
-        api.content.params = {};
-      });
+      if (pAppend)
+        $(pSelectorContainer).append(response).promise().done(function () {
+          api.content.params = {};
+        });
+      else
+        $(pSelectorContainer).empty().html(response).promise().done(function () {
+          api.content.params = {};
+        });
     }
   });
 };
@@ -311,22 +318,34 @@ api.ajax.callback = function (pFunction, pResponse, pParams) {
 
 /**
  * Load a configuration file
- * Use Javascript rather than JQuery because the configuration must load synchronously before $(document).ready
- * @param {*} url
- * @param {*} callback
+ * @param {*} pUrl
+ * @param {*} pCallback
+ * @param {*} pAjaxParams
  */
-api.ajax.config = function (url, callback) {
-  var xobj = new XMLHttpRequest();
-  xobj.overrideMimeType("application/json");
-  xobj.open('GET', url, false);
-  xobj.onreadystatechange = function () {
-    if (xobj.readyState == 4 && xobj.status == "200") {
-      callback(xobj.responseText);
-    } else {
-      console.log("Internal Error: the configuration file \"" + url + "\" is missing or invalid.");
+api.ajax.config = function (pUrl, pCallback, pAjaxParams) {
+  // Default AJAX parameters
+  pAjaxParams = pAjaxParams || {};
+  pAjaxParams.method = pAjaxParams.method || 'GET';
+  pAjaxParams.dataType = pAjaxParams.dataType || 'json';
+  pAjaxParams.jsonp = pAjaxParams.jsonp || false; // Fix for "??" JQuery placeholder
+  pAjaxParams.timeout = pAjaxParams.timeout || 60000;
+  pAjaxParams.async = pAjaxParams.async || false;
+
+  ajaxParams = {
+    url: pUrl,
+    success: function (response) {
+      pCallback(response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      // Log the issue rather than popping it in a Bootstrap modal because the document may not be ready yet
+      console.log("An Internal Server has occurred: the configuration file \"" + url + "\" is missing or invalid.");
     }
   };
-  xobj.send(null);
+
+  // Merge ajax parameters
+  $.extend(ajaxParams, pAjaxParams);
+  // Run the Ajax call
+  $.ajax(ajaxParams);
 };
 
 /*******************************************************************************
