@@ -1,5 +1,4 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Watches](https://img.shields.io/github/watchers/goncaloperes/Project-CodeIgniter-CMS.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/goncaloperes/Project-CodeIgniter-CMS/watchers)
 
 # Client API Library
 The **Client API Library** is a library of Javascript namespaced methods and CSS stylesheets based on [JQuery](https://jquery.com/) and [Bootstrap](https://getbootstrap.com/).
