@@ -338,7 +338,7 @@ api.ajax.config = function (pUrl, pCallback, pAjaxParams) {
     },
     error: function (jqXHR, textStatus, errorThrown) {
       // Log the issue rather than popping it in a Bootstrap modal because the document may not be ready yet
-      console.log("An Internal Server has occurred: the configuration file \"" + url + "\" is missing or invalid.");
+      console.log("An Internal Server has occurred: the configuration file \"" + pUrl + "\" is missing or invalid.");
     }
   };
 
@@ -524,8 +524,8 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
     $(C_API_SELECTOR_MODAL_BUTTON_CONFIRM).unbind("click");
   })
 
-  // Display the Modal
-  $(C_API_SELECTOR_MODAL_CONFIRM).modal();
+  // Force the modal to re-initialise before displaying in case of cascade confirm modals
+  $(C_API_SELECTOR_MODAL_CONFIRM).data('bs.modal', null).modal();
 };
 
 /**
