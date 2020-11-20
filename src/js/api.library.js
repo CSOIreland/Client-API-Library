@@ -510,7 +510,7 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
   // Set the body of the Modal - Empty the container first
   $("#modal-confirm").find(".modal-body > p").empty().html(pMessage);
 
-  $("#modal-confirm").find("[name=submit]").once("click", function () {
+  $("#modal-confirm").find("[name=confirm]").once("click", function () {
     // Close the Modal
     $("#modal-confirm").modal('hide');
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
