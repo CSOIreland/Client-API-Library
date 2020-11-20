@@ -19,7 +19,7 @@ api.spinner.progress.timeout = 0;
  */
 api.spinner.start = function () {
   if (!api.spinner.count++) {
-    $(C_API_SELECTOR_SPINNER).show();
+    $("#spinner").show();
   }
 };
 
@@ -39,12 +39,12 @@ api.spinner.stop = function () {
 
       // Close the spinner after 1 second to show 100% in the progress bar
       setTimeout(function () {
-        $(C_API_SELECTOR_SPINNER).fadeOut('slow');
+        $("#spinner").fadeOut('slow');
       }, 1000);
     }
     else {
       // Close the spinner immediatelly
-      $(C_API_SELECTOR_SPINNER).fadeOut('slow');
+      $("#spinner").fadeOut('slow');
     }
   }
 };
@@ -60,9 +60,9 @@ api.spinner.progress.start = function (progressTimeout) {
     api.spinner.progress.timeout = progressTimeout;
 
     // Set progress to 0%
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '1%').attr('aria-valuenow', 1);
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("1%");
-    $(C_API_SELECTOR_SPINNER + " .progress").show();
+    $("#spinner .progress").find("[name=bar]").css('width', '1%').attr('aria-valuenow', 1);
+    $("#spinner .progress").find("[name=percentage]").text("1%");
+    $("#spinner .progress").show();
 
     // Initiate the progress by setting the timeout
     api.spinner.progress.setTimeout();
@@ -76,9 +76,9 @@ api.spinner.progress.stop = function () {
   clearTimeout(api.spinner.progress.instance);
 
   // Set progress to 100%
-  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', '100%').attr('aria-valuenow', 100);
-  $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text("100%");
-  $(C_API_SELECTOR_SPINNER + " .progress").fadeOut('slow');
+  $("#spinner .progress").find("[name=bar]").css('width', '100%').attr('aria-valuenow', 100);
+  $("#spinner .progress").find("[name=percentage]").text("100%");
+  $("#spinner .progress").fadeOut('slow');
 };
 
 /**
@@ -99,9 +99,9 @@ api.spinner.progress.setTimeout = function () {
 
   api.spinner.progress.instance = setTimeout(function () {
     // Never display 100% as it may need longer than expected to complete
-    var percentage = Math.min(parseInt($(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").attr('aria-valuenow')) + 1, 99);
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=bar]").css('width', percentage + '%').attr('aria-valuenow', percentage);
-    $(C_API_SELECTOR_SPINNER + " .progress").find("[name=percentage]").text(percentage + "%");
+    var percentage = Math.min(parseInt($("#spinner .progress").find("[name=bar]").attr('aria-valuenow')) + 1, 99);
+    $("#spinner .progress").find("[name=bar]").css('width', percentage + '%').attr('aria-valuenow', percentage);
+    $("#spinner .progress").find("[name=percentage]").text(percentage + "%");
     // Loop in 
     api.spinner.progress.setTimeout();
   }, api.spinner.progress.timeout);
@@ -187,14 +187,14 @@ api.content.navigate = function (pNavSelector, pRelativeURL, pNav_link_SelectorT
       url: pRelativeURL,
       async: false,
       success: function (response) {
-        $(C_API_SELECTOR_BODY).hide().empty().html(response).fadeIn();
+        $('#body').hide().empty().html(response).fadeIn();
       }
     });
 
     // "show" is a Bootstrap property
-    $(C_API_SELECTOR_NAVIGATION).find("*").removeClass("show");
+    $("#navigation").find("*").removeClass("show");
     // "active" is a Bootstrap property
-    $(C_API_SELECTOR_NAVIGATION).find("*").removeClass("active");
+    $("#navigation").find("*").removeClass("active");
 
     if (pNav_link_SelectorToHighlight)
       // "active" is a Bootstrap property
@@ -235,16 +235,16 @@ api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_m
     async: false,
     success: function (response) {
       api.content.params = pParams;
-      $(C_API_SELECTOR_BODY).hide().empty().html(response).fadeIn().promise().done(function () {
+      $('#body').hide().empty().html(response).fadeIn().promise().done(function () {
         api.content.params = {};
       });
     }
   });
 
   // "show" is a Bootstrap property
-  $(C_API_SELECTOR_NAVIGATION).find("*").removeClass("show");
+  $("#navigation").find("*").removeClass("show");
   // "active" is a Bootstrap property
-  $(C_API_SELECTOR_NAVIGATION).find("*").removeClass("active");
+  $("#navigation").find("*").removeClass("active");
 
   if (pNav_link_SelectorToHighlight)
     // "active" is a Bootstrap property
@@ -469,7 +469,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
         api.spinner.stop();
 
       // Stop the nav loader
-      $(C_API_SELECTOR_NAV_LOADER).removeClass('text-yellow fa-spin').addClass('text-navbar');
+      $("#nav-loader").removeClass('text-yellow fa-spin').addClass('text-navbar');
       $("body").css("cursor", "default");
     }
   }
@@ -479,7 +479,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
 
   try {
     // Start the nav loader
-    $(C_API_SELECTOR_NAV_LOADER).removeClass('text-navbar').addClass('text-yellow fa-spin');
+    $("#nav-loader").removeClass('text-navbar').addClass('text-yellow fa-spin');
     $("body").css("cursor", "progress");
 
     // Simulate sync behaviour
@@ -507,25 +507,19 @@ api.modal = {};
  * @param {*} pCallbackParams 
  */
 api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
-
   // Set the body of the Modal - Empty the container first
-  $(C_API_SELECTOR_MODAL_CONFIRM).find(C_API_SELECTOR_MODAL_BODY).empty().html(pMessage);
+  $("#modal-confirm").find(".modal-body > p").empty().html(pMessage);
 
-  $(C_API_SELECTOR_MODAL_BUTTON_CONFIRM).on("click", function () {
-    // Run the Callback function
-    pCallbackMethod(pCallbackParams);
-
+  $("#modal-confirm").find("[name=submit]").once("click", function () {
     // Close the Modal
-    $(C_API_SELECTOR_MODAL_CONFIRM).modal('hide');
+    $("#modal-confirm").modal('hide');
+    // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
+    // Consider refactoring by cloning the confir modal instead.
+    new Promise(resolve => setTimeout(resolve, 100)).then(() => { pCallbackMethod(pCallbackParams); });
   });
 
-  $(C_API_SELECTOR_MODAL_CONFIRM).on('hide.bs.modal', function (e) {
-    // Unbind to avoid the callback to loop
-    $(C_API_SELECTOR_MODAL_BUTTON_CONFIRM).unbind("click");
-  })
-
   // Force the modal to re-initialise before displaying in case of cascade confirm modals
-  $(C_API_SELECTOR_MODAL_CONFIRM).data('bs.modal', null).modal();
+  $("#modal-confirm").modal();
 };
 
 /**
@@ -535,10 +529,10 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
 api.modal.success = function (pMessage) {
 
   // Set the body of the Modal
-  $(C_API_SELECTOR_MODAL_SUCCESS).find(C_API_SELECTOR_MODAL_BODY).empty().html(pMessage);
+  $("#modal-success").find(".modal-body > p").empty().html(pMessage);
 
   // Display the Modal
-  $(C_API_SELECTOR_MODAL_SUCCESS).modal();
+  $("#modal-success").modal();
 };
 
 /**
@@ -548,10 +542,10 @@ api.modal.success = function (pMessage) {
 api.modal.error = function (pMessage) {
 
   // Set the body of the Modal
-  $(C_API_SELECTOR_MODAL_ERROR).find(C_API_SELECTOR_MODAL_BODY).empty().html(pMessage);
+  $("#modal-error").find(".modal-body > p").empty().html(pMessage);
 
   // Display the Modal
-  $(C_API_SELECTOR_MODAL_ERROR).modal();
+  $("#modal-error").modal();
 };
 
 /**
@@ -561,10 +555,10 @@ api.modal.error = function (pMessage) {
 api.modal.information = function (pMessage) {
 
   // Set the body of the Modal
-  $(C_API_SELECTOR_MODAL_INFORMATION).find(C_API_SELECTOR_MODAL_BODY).empty().html(pMessage);
+  $("#modal-information").find(".modal-body > p").empty().html(pMessage);
 
   // Display the Modal
-  $(C_API_SELECTOR_MODAL_INFORMATION).modal();
+  $("#modal-information").modal();
 };
 
 /**
@@ -574,10 +568,10 @@ api.modal.information = function (pMessage) {
 api.modal.exception = function (pMessage) {
 
   // Set the body of the Modal
-  $(C_API_SELECTOR_MODAL_EXCEPTION).find(C_API_SELECTOR_MODAL_BODY).empty().html(pMessage);
+  $("#modal-exception").find(".modal-body > p").empty().html(pMessage);
 
   // Display the Modal
-  $(C_API_SELECTOR_MODAL_EXCEPTION).modal();
+  $("#modal-exception").modal();
 };
 
 

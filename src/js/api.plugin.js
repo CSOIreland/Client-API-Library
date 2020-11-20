@@ -13,13 +13,13 @@ API - Plugin - Return To Top
 $(document).ready(function () {
     $(window).scroll(function () {
         if ($(this).scrollTop() >= 50) {
-            $(C_API_SELECTOR_RETURN_TO_TOP).fadeIn('slow');
+            $("#return-to-top").fadeIn('slow');
         } else {
-            $(C_API_SELECTOR_RETURN_TO_TOP).fadeOut('slow');
+            $("#return-to-top").fadeOut('slow');
         }
     });
 
-    $(C_API_SELECTOR_RETURN_TO_TOP).click(function () {
+    $("#return-to-top").click(function () {
         $('body,html').stop().animate({
             scrollTop: 0
         }, 500);
