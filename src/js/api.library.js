@@ -511,11 +511,12 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
   $("#modal-confirm").find(".modal-body > p").empty().html(pMessage);
 
   $("#modal-confirm").find("[name=confirm]").once("click", function () {
-    // Close the Modal
-    $("#modal-confirm").modal('hide');
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
-    // Consider refactoring by cloning the confir modal instead.
-    new Promise(resolve => setTimeout(resolve, 100)).then(() => { pCallbackMethod(pCallbackParams); });
+    $("#modal-confirm").modal('hide').delay(100).queue(function () {
+      // https://stackoverflow.com/questions/10860171/run-function-after-delay
+      pCallbackMethod(pCallbackParams);
+      $(this).dequeue();
+    });
   });
 
   // Force the modal to re-initialise before displaying in case of cascade confirm modals
