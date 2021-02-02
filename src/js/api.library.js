@@ -485,10 +485,13 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     // Simulate sync behaviour
     if (simulateSync)
       api.spinner.start();
+    // Extend the session if any
+    api.cookie.session.extend();
 
     // Make the Ajax call
     return $.ajax(extendedAJAXParams);
   } catch (error) {
+    console.log(error)
     // Pop the exception in the Bootstrap Modal
     api.modal.exception("An unhandled Ajax exception has occurred. Please try again.");
     return false;
@@ -654,4 +657,128 @@ api.uri.getNoFooter = function () {
  */
 api.uri.getBody = function () {
   return api.uri.getParam(C_API_URI_BODY);
+};
+
+/*******************************************************************************
+API - Library - Cookie
+*******************************************************************************/
+api.cookie = {};
+api.cookie.session = {};
+api.cookie.session.data = {
+  length: null,
+  expiry: null,
+  logoutEndpoint: null,
+  logoutMethod: null,
+}
+api.cookie.session.options = {
+  path: "/",
+  secure: "true",
+  sameSite: "strict"
+}
+
+/**
+ * Virtual method to confirm the extension of the Session Cookie
+ * Override this method in the local application
+ */
+api.cookie.session.confirmExtension = function () { };
+
+/**
+ * Start the Session Cookie
+ */
+api.cookie.session.start = function (pLength, pLogoutEnpoint, pLogoutMethod) {
+  // Get unix timestamp to deal with numbers rather than dates
+  var timestamp = Math.round(new Date().getTime() / 1000);
+
+  // Set the Session Cookie
+  Cookies.set(
+    C_API_COOKIE_SESSION,
+    $.extend(true, {}, api.cookie.session.data,
+      {
+        length: pLength,
+        expiry: timestamp + pLength,
+        logoutEndpoint: pLogoutEnpoint,
+        logoutMethod: pLogoutMethod
+      }),
+    api.cookie.session.options);
+
+  // Run the routine every second
+  window.setInterval(api.cookie.session.intervalRoutine, 1000);
+};
+
+/**
+ * Extend the Session Cookie
+ */
+api.cookie.session.extend = function () {
+  // Get the session cookie if any
+  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
+
+  if (data) {
+    // Get unix timestamp to deal with numbers rather than dates
+    var timestamp = Math.round(new Date().getTime() / 1000);
+    // Extend Session Cookie 
+    Cookies.set(
+      C_API_COOKIE_SESSION,
+      $.extend(true, {}, data,
+        {
+          length: data.length,
+          expiry: timestamp + data.length,
+        }),
+      api.cookie.session.options);
+  }
+
+};
+
+/**
+ * End the Session Cookie
+ */
+api.cookie.session.end = function (logoutEndpoint, logoutMethod) {
+  logoutEndpoint = logoutEndpoint || null;
+  logoutMethod = logoutMethod || null;
+  var session = Cookies.getJSON(C_API_COOKIE_SESSION);
+  // Run the Logout API
+  api.ajax.jsonrpc.request(
+    logoutEndpoint || session.logoutEndpoint,
+    logoutMethod || session.logoutMethod,
+    null,
+    "api.cookie.session.endCallbak"
+  );
+  // Remove Session Cookie
+  Cookies.remove(C_API_COOKIE_SESSION);
+};
+
+/**
+ * End the Session Cookie callback
+ */
+api.cookie.session.endCallbak = function (data) {
+  if (data == C_API_AJAX_SUCCESS) {
+    // Force the reload of the application 
+    window.location.href = window.location.pathname;
+  }
+  else {
+    api.modal.exception("An unexpected error has occurred. Please try again.");
+  }
+};
+
+/**
+ * Routine to run at each interval
+ */
+api.cookie.session.intervalRoutine = function () {
+  // Get the session cookie if any
+  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
+  if (!data || $.active) {
+    // If no session cookie or any running Ajax, then do nothing
+    return;
+  }
+
+  // Get unix timestamp to deal with numbers rather than dates
+  var timestamp = Math.round(new Date().getTime() / 1000);
+  if (timestamp > data.expiry) {
+    // The session has expired, force the logout
+    api.cookie.session.end();
+  } else if (timestamp > data.expiry - 60) {
+    // The session is valid but about to expire (1 minute earlier), confirm the extension
+    api.cookie.session.confirmExtension();
+  } else {
+    // The session is valid, do nothing
+  }
 };
