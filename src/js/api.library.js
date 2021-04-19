@@ -177,7 +177,9 @@ api.content.navigate = function (pNavSelector, pRelativeURL, pNav_link_SelectorT
   if (uri.is("relative") === false)
     return;
 
-  $(pNavSelector).click(function () {
+  $(pNavSelector).click(function (e) {
+    e.preventDefault();
+
     /**
      * Load the URL with smooth transition
      * Set async to false to enforce script serialization
