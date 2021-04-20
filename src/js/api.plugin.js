@@ -8,6 +8,17 @@ var api = api || {};
 api.plugin = api.plugin || {};
 
 /*******************************************************************************
+API - Plugin - JQuery extensions
+*******************************************************************************/
+
+//Unbind all events prior to binding a new event using .on
+(function ($) {
+    $.fn.once = function () {
+        return this.off(arguments[0]).on(arguments[0], arguments[1]);
+    };
+})(jQuery);
+
+/*******************************************************************************
 API - Plugin - Return To Top
 *******************************************************************************/
 $(document).ready(function () {
