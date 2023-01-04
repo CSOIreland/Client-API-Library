@@ -17,8 +17,26 @@ api.spinner.progress.timeout = 0;
 /**
  * Show the Overlay and start the Spinner
  */
-api.spinner.start = function () {
-  if (!api.spinner.count++) {
+api.spinner.start = function (pItemSpinner = null) {
+  if (pItemSpinner != null) {
+    //remove existing div
+    $(pItemSpinner).find(".item-spinner").remove();
+    var item = $('#spinner-holder').find('.item-spinner').clone();
+    $(pItemSpinner).prepend($(item));
+
+    $(item).removeClass("d-none");
+    $(pItemSpinner).find(".item-spinner").show();
+
+    /** if element changes size then reposition the loader */
+    let resizeObserver = new ResizeObserver(() => {
+      //15px is half the circle height
+      $(pItemSpinner).find(item).find('.item-loader').css('margin-top', ($(pItemSpinner).height() * 0.5) - 15);
+    });
+
+    resizeObserver.observe($(pItemSpinner)[0]);
+    /**** end of resizing listener */
+
+  } else if (!api.spinner.count++) {
     $("#spinner").show();
   }
 };
@@ -26,28 +44,34 @@ api.spinner.start = function () {
 /**
  * Hide the Overlay and stop the Spinner
  */
-api.spinner.stop = function () {
-  if (api.spinner.count) {
-    // Do not go negative
-    api.spinner.count--;
-  }
-
-  if (!api.spinner.count) {
-    if (api.spinner.progress.instance) {
-      // End the progress bar
-      api.spinner.progress.stop();
-
-      // Close the spinner after 1 second to show 100% in the progress bar
-      setTimeout(function () {
-        $("#spinner").fadeOut('slow');
-      }, 1000);
+api.spinner.stop = function (pItemSpinner = null) {
+  if (pItemSpinner != null) {
+    $(pItemSpinner).find(".item-spinner").find('.item-loader').addClass('d-none');
+    $(pItemSpinner).find(".item-spinner").remove();
+  } else {
+    if (api.spinner.count) {
+      // Do not go negative
+      api.spinner.count--;
     }
-    else {
-      // Close the spinner immediatelly
-      $("#spinner").fadeOut('slow');
+
+    if (!api.spinner.count) {
+      if (api.spinner.progress.instance) {
+        // End the progress bar
+        api.spinner.progress.stop();
+
+        // Close the spinner after 1 second to show 100% in the progress bar
+        setTimeout(function () {
+          $("#spinner").fadeOut('slow');
+        }, 1000);
+      }
+      else {
+        // Close the spinner immediatelly
+        $("#spinner").fadeOut('slow');
+      }
     }
   }
 };
+
 
 /**
  *  Start the iterative Timeout method for the progress bar
@@ -366,7 +390,7 @@ api.ajax.jsonrpc = {};
  * @param {*} callbackParams_onError 
  * @param {*} pAJAX_Params 
  */
-api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params) {
+api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner = null) {
   // Default API parameters
   pAPI_Params = pAPI_Params || {};
 
@@ -468,7 +492,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     complete: function () {
       // Simulate sync behaviour
       if (simulateSync)
-        api.spinner.stop();
+        api.spinner.stop(pItemSpinner);
 
       // Stop the nav loader
       $("#nav-loader").removeClass('text-yellow fa-spin').addClass('text-navbar');
@@ -486,7 +510,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
 
     // Simulate sync behaviour
     if (simulateSync)
-      api.spinner.start();
+      api.spinner.start(pItemSpinner);
     // Extend the session if any
     api.cookie.session.extend();
 
