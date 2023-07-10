@@ -153,6 +153,9 @@ api.content.getParam = function (pKey) {
  * @param {*} pAppend 
  */
 api.content.load = function (pSelectorContainer, pRelativeURL, pParams, pAppend) {
+ 
+  api.spinner.start();
+ 
   // Default parameters
   pParams = pParams || {};
   pAppend = pAppend || false;
@@ -175,10 +178,12 @@ api.content.load = function (pSelectorContainer, pRelativeURL, pParams, pAppend)
       if (pAppend)
         $(pSelectorContainer).append(response).promise().done(function () {
           api.content.params = {};
+          api.spinner.stop();
         });
       else
         $(pSelectorContainer).empty().html(response).promise().done(function () {
           api.content.params = {};
+          api.spinner.stop();
         });
     }
   });
@@ -241,6 +246,8 @@ api.content.navigate = function (pNavSelector, pRelativeURL, pNav_link_SelectorT
  * @param {*} pParams 
  */
 api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_menu_SelectorToHighlight, pParams) {
+  //start the spinner
+  api.spinner.start();  
   // Default parameters
   pNav_link_SelectorToHighlight = pNav_link_SelectorToHighlight || null;
   pNav_menu_SelectorToHighlight = pNav_menu_SelectorToHighlight || null;
@@ -263,6 +270,7 @@ api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_m
       api.content.params = pParams;
       $('#body').hide().empty().html(response).fadeIn().promise().done(function () {
         api.content.params = {};
+		api.spinner.stop();
       });
     }
   });
