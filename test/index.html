@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <!-- **************************************************************************** -->
     <!-- Title -->
     <!-- **************************************************************************** -->
@@ -13,73 +12,103 @@
     <!-- Meta -->
     <!-- **************************************************************************** -->
 
-    <meta charset="UTF-16">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-16" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
 
     <!-- Favicons - https://realfavicongenerator.net -->
-    <link rel="apple-touch-icon" sizes="180x180" href="image/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="image/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="image/favicon/favicon-16x16.png">
-    <link rel="manifest" href="image/favicon/site.webmanifest">
-    <link rel="mask-icon" href="image/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="image/favicon/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="image/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="image/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="image/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="image/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="image/favicon/site.webmanifest" />
+    <link rel="mask-icon" href="image/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="test/image/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-config" content="image/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- **************************************************************************** -->
     <!-- Resources - API - Dependency -->
     <!-- **************************************************************************** -->
 
     <!-- JQuery 3.X - https://github.com/jquery/jquery/ -->
-    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap - https://github.com/twbs/bootstrap/ -->
-    <link href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/FezVrasta/popper.js@v1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4.5.2/dist/js/bootstrap.min.js"></script>
-
-    <!-- URI.js - https://github.com/medialize/URI.js/ -->
-    <script src="https://cdn.jsdelivr.net/gh/medialize/URI.js@v1.19.2/src/URI.min.js"></script>
+    <!-- CSOBS-Theme https://github.com/CSOIreland/CSOBSTheme -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC2/dist/app.bootstrap.guidelines.min.js"
+        integrity="sha256-6cIl2i2aK9ZobLFvHumaxDCEwLQX1Y3c7ajK1sRnfZg=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC2/dist/app.bootstrap.guidelines.min.css"
+        integrity="sha256-TFAJ/oF6taMRMJRSyEnIMd5eOLC1U5HUOdOBAZKJn4M=" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.bootstrap.guidelines.min.css">
+    <!-- URI.js -    https://github.com/medialize/URI.js/ -->
+    <script src="https://cdn.jsdelivr.net/npm/urijs@1.19.11/src/URI.min.js"
+        integrity="sha256-DERHKoM0qF1q2noFAo0Zz4urfbVg4kTgFyWMMXu6xgQ=" crossorigin="anonymous"></script>
 
     <!-- ClipboardJS - https://github.com/zenorocha/clipboard.js/ -->
-    <script src="https://cdn.jsdelivr.net/gh/zenorocha/clipboard.js@v2.0.4/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"
+        integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
 
     <!-- **************************************************************************** -->
     <!-- Resources - API -->
     <!-- **************************************************************************** -->
 
+    <script src="../src/js/api.config.js"></script>
+    <script src="../src/js/api.constant.js"></script>
+    <script src="../src/js/api.library.js"></script>
+    <script src="../src/js/api.plugin.dragndrop.js"></script>
+    <script src="../src/js/api.plugin.js"></script>
+
+
     <!-- API Constant -->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.constant.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.constant.min.js"
+        integrity="sha256-YvyHbw1yTNvxA3G64LogRzCw7SqaWo37wwUYGDGmiD4=" crossorigin="anonymous"></script>
 
-    <!-- API Configuration -->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.config.min.js"></script>
+    <!-- API Configuration ->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.config.min.js"
+        integrity="sha256-WPGhYSulHDKCrnnthJ4jr1HkUmYmpqXpGEX4nXZAcns=" crossorigin="anonymous"></script>
 
-    <!-- API Library -->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.library.min.js"></script>
+    <!-- API Library ->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.library.min.js"
+        integrity="sha256-XbBtjzvPGUcvqGF9JMt7gCNUGo70HwYGHvLrx3URPbg=" crossorigin="anonymous"></script>
 
-    <!-- API Plugin -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.min.js"></script>
+    <!-- API Plugin ->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.min.js"
+        integrity="sha256-OX9qnWUyxo+SmLQDBBdjQzdv/QMmMkSFyzQmXgWGxdc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.min.css"
+        integrity="sha256-20KJRdggsA21vS1Fw+ASrWivQqnw+/9LX2NFpSDtI2k=" crossorigin="anonymous">
 
-    <!-- API Plugin - Drag n Drop -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.dragndrop.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.dragndrop.min.js"></script>
+    <!-- API Plugin - Drag n Drop ->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.dragndrop.min.css"
+        integrity="sha256-aqNsPNzEyYAGRJcEUm3N85JlxF2xrnwh6yNxQEwTaPc=" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.dragndrop.min.js"
+        integrity="sha256-iRAhcox63wqRJmELabDjJFyFtdwKAR2sNc2AwBC/eBI=" crossorigin="anonymous"></script>
+    -->
 
     <!-- **************************************************************************** -->
     <!-- Resurces - App - Dependency -->
     <!-- **************************************************************************** -->
 
     <!-- Font-awesome - https://github.com/FortAwesome/Font-Awesome/-->
-    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.11.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/FontAwesome@6.4.0b1/css/all.min.css"
+        integrity="sha256-J0HMVykr20JifTvJAQxrZRrrrUvATcxB8D9nRaIEUzo=" crossorigin="anonymous">
 
     <!-- Cookie Consent plugin - https://github.com/osano/cookieconsent/ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/osano/cookieconsent@3.1.1/build/cookieconsent.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/osano/cookieconsent@3.1.1/build/cookieconsent.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/osano/cookieconsent@3.1.1/build/cookieconsent.min.css"
+        integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/gh/osano/cookieconsent@3.1.1/build/cookieconsent.min.js"
+        integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin="anonymous"></script>
 
     <!-- JS-Cookie - https://github.com/js-cookie/js-cookie -->
-    <script src="https://cdn.jsdelivr.net/gh/js-cookie/js-cookie@v2.2.1/src/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"
+        integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
+
 
     <!-- **************************************************************************** -->
     <!-- Resurces - App - Optional -->
@@ -90,32 +119,25 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     -->
 
-    <!-- Bootstrap Toggle - https://github.com/CSOIreland/bootstrap-toggle/ -->
-    <!--
-    <link href="https://cdn.jsdelivr.net/gh/CSOIreland/bootstrap-toggle@2.2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/bootstrap-toggle@2.2.2.2/js/bootstrap-toggle.min.js"></script>
-    -->
-
     <!-- Bootstrap Pagination - https://github.com/josecebe/twbs-pagination/ -->
     <!--
     <script src="https://cdn.jsdelivr.net/gh/josecebe/twbs-pagination@v1.4.1/jquery.twbsPagination.min.js"></script>
     -->
 
-    <!-- MomentJS - https://github.com/moment/moment/ -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/gh/moment/moment@v2.24.0/min/moment-with-locales.min.js"></script>
-    -->
+    <!-- luxon js-->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"
+        integrity="sha256-Nn+JGDrq3PuTxcDfJmmI0Srj5LpfOFlKqEiPwQK7y40=" crossorigin="anonymous"></script>
 
     <!-- Editable-table (archived, no version) - https://github.com/mindmup/editable-table -->
     <!--
     <script src="https://cdn.jsdelivr.net/gh/mindmup/editable-table/mindmup-editabletable.min.js"></script>
     -->
 
-    <!-- Date Range Picker - https://github.com/dangrossman/daterangepicker/ -->
-    <!--
-    <link href="https://cdn.jsdelivr.net/gh/dangrossman/daterangepicker@v3.0.5/daterangepicker.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/dangrossman/daterangepicker@v3.0.5/daterangepicker.min.js"></script>
-    -->
+    <!--https://github.com/easepick/easepick/-->
+    <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.js"
+        integrity="sha256-2/Mx4doTAXxxQKPWiQGCel22qdqemTzeB8VC+2klEZo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"
+        integrity="sha256-rz7p/ODn1E84/RimyGdtD2Ro8Vl5e7cK1OnfrtnBFwg=" crossorigin="anonymous">
 
     <!--Highcharts - https://www.jsdelivr.com/package/npm/highcharts/ -->
     <!--
@@ -127,10 +149,9 @@
     -->
 
     <!-- JQuery Validate - https://github.com/jquery-validation/jquery-validation/ -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/gh/jquery-validation/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jquery-validation/jquery-validation@1.19.1/dist/additional-methods.min.js"></script>
-    -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"
+        integrity="sha256-JwUksNJ6/R07ZiLRoXbGeNrtlFZMFDKX4hemPiHOmCA=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 
     <!-- JSON-Stat - https://github.com/badosa/JSON-stat/ -->
     <!--
@@ -143,10 +164,13 @@
     -->
 
     <!-- Select2 - https://github.com/select2/select2/ -->
-    <!--
-    <link href="https://cdn.jsdelivr.net/gh/select2/select2@4.0.11/dist/css/select2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/select2/select2@4.0.11/dist/js/select2.min.js"></script>
-    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
+        integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"
+        integrity="sha256-AFAYEOkzB6iIKnTYZOdUf9FFje6lOTYdwRJKwTN5mks=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+        integrity="sha256-XLNUEfzPGHBeStES2DbLUURZ3e793BablwzJlYj6W2Q=" crossorigin="anonymous">
 
     <!-- Datatables - https://datatables.net/ powered by ClooudFlare -->
     <!--
@@ -154,73 +178,199 @@
     -->
 
     <!-- Datatables - Bootstrap -->
-    <!--
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    -->
+    <!-- dataTables-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/DataTables/css/dataTables.bootstrap5.min.css"
+        integrity="sha256-GP2WneSxOFSbcf8YJqncLU1S9VMqifEQQhg6UHyBVP8=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/DataTables/js/jquery.dataTables.min.js"
+        integrity="sha256-VSu9DD6vJurraXgjxQJv9BuzedGfJm7XEgPQQehKBlw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/DataTables/js/dataTables.bootstrap5.min.js"
+        integrity="sha256-B5oXOc2Thb138S9MfkLHDs6V7sKVQl4V+Eu6G7zHDUE=" crossorigin="anonymous"></script>
 
-    <!-- Datatables - Extension - Buttons -->
-    <!--
-    <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.bootstrap4.min.js"></script>
-    -->
 
-    <!-- Datatables - Extension - Buttons - Print -->
-    <!--
-    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
-    -->
+    <!-- autofill-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/AutoFill/css/autoFill.bootstrap5.min.css"
+        integrity="sha256-fV+x8tCgnTVVPgNNC3wHRy4EaU6L4xA50FfTEfd8Vzo=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/AutoFill/js/dataTables.autoFill.min.js"
+        integrity="sha256-1U09MOW2HW9ocsIBffjywfPmHED7PPFN1puDysLaRcs=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/AutoFill/js/autoFill.bootstrap5.min.js"
+        integrity="sha256-l4tSrrNO4deDBZjm6aOk5G0PczqnPPKaGydSZpkxTQI=" crossorigin="anonymous"></script>
 
-    <!-- Datatables - Extension - Buttons - HTML (dependency on JSZip & PDFMake) -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/gh/Stuk/jszip@v3.2.2/dist/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bpampuch/pdfmake@0.1.61/build/pdfmake.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bpampuch/pdfmake@0.1.61/build/vfs_fonts.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
-    -->
+    <!-- buttons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/css/buttons.bootstrap5.min.css"
+        integrity="sha256-WsDlGT1CymcTZGtRhfHgtgKCIcwqxyNh6BnOq7PeOJI=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/js/dataTables.buttons.min.js"
+        integrity="sha256-dJiW4V/uPOIBxZUw2TwTxw1eSCqwzUDZIo2jDFyKBLw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/js/buttons.colVis.min.js"
+        integrity="sha256-UZ7xow46mpw0rxJej8lEZuDdKzCe6CKIdZJ6yMyd+qs=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/js/buttons.html5.min.js"
+        integrity="sha256-Ovv7z/mozqT8l4fJSUUSCC8n3e7iAXlWXHj8FLuoG58=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/js/buttons.print.min.js"
+        integrity="sha256-wfdGiSxaNSqJXXBwwtfFk0FgfkLad+p0yUa2c8Ug09k=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Buttons/js/buttons.bootstrap5.min.js"
+        integrity="sha256-6gtqbO3KDs9qfc4P5XqrGZzqbTVfKZ9rZqug7qdM4vs=" crossorigin="anonymous"></script>
 
-    <!-- Datatables - Extension - Responsive -->
-    <!--
-    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    -->
 
-    <!-- Datatables - Sorting - Datetime Moment -->
-    <!--
-    <script src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
-    -->
+    <!-- col reorder-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/ColReorder/css/colReorder.bootstrap5.min.css"
+        integrity="sha256-DQ3ihdmBVAv+YDFIF6/D5sKJobgWhI55dN3Idpu5iog=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/ColReorder/js/dataTables.colReorder.min.js"
+        integrity="sha256-rWIbGTbMjGDOEHGPr1Qpu0X27Bd6cZpGSIbmDBVauZ4=" crossorigin="anonymous"></script>
 
-    <!-- Datatables - Sorting - Natural -->
-    <!--
-    <script src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/natural.js"></script>
-    -->
+
+
+
+
+    <!-- fixedColumns-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/FixedColumns/css/fixedColumns.bootstrap5.min.css"
+        integrity="sha256-7Jk2xipB2Jqve/lTQVgSkDr+ml7ZybDCPEzooqec3Jg=" crossorigin="anonymous">
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/FixedColumns/js/dataTables.fixedColumns.min.js"
+        integrity="sha256-BilAAdM1dtS7bVZp0muaeGagJcTx5EUfOThWOD+Vb7g=" crossorigin="anonymous"></script>
+
+
+    <!-- fixedHeader-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/FixedHeader/css/fixedHeader.bootstrap5.min.css"
+        integrity="sha256-/q1nzzQeDTqUg1OLdSk+yDCXhKVStd64EUlCzS0Nx/I=" crossorigin="anonymous">
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/FixedHeader/js/dataTables.fixedHeader.min.js"
+        integrity="sha256-iA40UazQp2P/viuXP31J8pRJ1JW+kGrm8RDppVgtXv8=" crossorigin="anonymous"></script>
+
+
+    <!-- jszip-->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/JSZip/jszip.min.js"
+        integrity="sha256-nhcKIbtnzPfcqxIscm5yY3EFpF2JM1Cvqbejg2mgwf0=" crossorigin="anonymous"></script>
+
+
+    <!-- keytable-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/KeyTable/css/keyTable.bootstrap5.min.css"
+        integrity="sha256-1gs+G5OmaQa8he2cUnCErkKacxlI5gLFPH3NO4vTfB0=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/KeyTable/js/dataTables.keyTable.min.js"
+        integrity="sha256-ViSbI93qO/zke1DYVI4J3tsQXJ9AFdzZZIltu2hDQA0=" crossorigin="anonymous"></script>
+
+
+    <!-- pdfmake-->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/pdfmake/vfs_fonts.js"
+        integrity="sha256-Jx4bZPsEi0CLVzHymMPYDBj+alGFTggHLDdjhiaR7lw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/pdfmake/pdfmake.min.js"
+        integrity="sha256-Ia9buLoVYfn5nUElqm080I+m0jUer07I0Ql+aezACCg=" crossorigin="anonymous"></script>
+
+
+    <!-- responsive-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Responsive/css/responsive.bootstrap5.min.css"
+        integrity="sha256-524a96FDW9HVi1GRvJ2EKwaiNsdyIR9y1W0umm+RZL4=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Responsive/js/dataTables.responsive.min.js"
+        integrity="sha256-1Yv+T+CKPag9TpIf97uahHWdNh1ZtZxRK9boiKA0Xto=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Responsive/js/responsive.bootstrap5.min.js"
+        integrity="sha256-QG7Ah9CmuhOZOaDgu1rmBzL5TmnCzXQWZRGAYbRLdQA=" crossorigin="anonymous"></script>
+
+
+    <!-- row group-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/RowGroup/css/rowGroup.bootstrap5.min.css"
+        integrity="sha256-n5Q9cIUs4FmTl4zybd4nhbC48mtwtVgXi2elF8nAGjs=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/RowGroup/js/dataTables.rowGroup.min.js"
+        integrity="sha256-OYY3s7935wZw+GjdMZ+FJnhCvCuQ2OBSvyCDjguK+V8=" crossorigin="anonymous"></script>
+
+
+    <!-- rowreorder-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/RowReorder/css/rowReorder.bootstrap5.min.css"
+        integrity="sha256-LgVXCzezwY8xAXuhWuancBIwob10uEj0XXUyvoqfMR0=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/RowReorder/js/dataTables.rowReorder.min.js"
+        integrity="sha256-oyhuTsRno/rGqwICmXjN4TK5VQyP+ey2rpYcQp6JR0Q=" crossorigin="anonymous"></script>
+
+
+    <!-- scroller-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Scroller/css/scroller.bootstrap5.min.css"
+        integrity="sha256-8UeuyUKl+x4lpGQK2KQp/Fu04egu0oW+ceav0onkuEY=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Scroller/js/dataTables.scroller.min.js"
+        integrity="sha256-dOrwuwi47uNcnIwacy+KTdeJ9EYQxe1oVba9UkAOTLU=" crossorigin="anonymous"></script>
+
+
+    <!-- search builder-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchBuilder/css/searchBuilder.bootstrap5.min.css"
+        integrity="sha256-P5pyJFnWGCFc8mQGzi+yqvZNbtDoE16dG6sPkUKFueo=" crossorigin="anonymous">
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchBuilder/js/dataTables.searchBuilder.min.js"
+        integrity="sha256-JRRv5UZEd/vpVB1Q0EAEnASffb5O2oWdcNWXz9g5NNg=" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchBuilder/js/searchBuilder.bootstrap5.min.js"
+        integrity="sha256-OaeCdAMGP9ArbQoqfJ5QyzibjPwZ9Q0Cf74RyecPIcY=" crossorigin="anonymous"></script>
+
+
+    <!-- search panes-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchPanes/css/searchPanes.bootstrap5.min.css"
+        integrity="sha256-OhKF9tdaDcpUhxgBry62r9N4vpCBb4BCo90q2pnufe8=" crossorigin="anonymous">
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchPanes/js/dataTables.searchPanes.min.js"
+        integrity="sha256-NL4VD5kwak6BAYIORVa7weBo9HclJ2AeUsOnIJuv1z0=" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/SearchPanes/js/searchPanes.bootstrap5.min.js"
+        integrity="sha256-iFXhO44BtyT0kf11/Ut3rh12xyi7JdmL7C4SymYEp74=" crossorigin="anonymous"></script>
+
+
+    <!-- select-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Select/css/select.bootstrap5.min.css"
+        integrity="sha256-+jj2c4C2V0WlUtnS0h4tllCJ/yll6wwawQ3Yun3rHVQ=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/Select/js/dataTables.select.min.js"
+        integrity="sha256-+nJ/+POr/rDvirjQ8KClkUjEvVoPjX9YSnQRAIyAspY=" crossorigin="anonymous"></script>
+
+
+    <!-- state restore-->
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/StateRestore/js/dataTables.stateRestore.min.js"
+        integrity="sha256-f1tIKShZPLLiUfnw0MGNxNIez7PVD1uwF+WSc2BGFpk=" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/StateRestore/js/stateRestore.bootstrap5.min.js"
+        integrity="sha256-lsxo9rd1jGCMo71PTx86wcDPKr5DFqyADJ0jbr0ilV4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        shref="https://cdn.jsdelivr.net/gh/CSOIreland/Datatables@1.13.4b1/StateRestore/css/stateRestore.bootstrap5.min.css"
+        integrity="sha256-K6x0fmKJKTqpbS4Vfo4tTeoZhvonOZ36gKB8r7KriBk=" crossorigin="anonymous">
 
     <!-- TinyMCE - https://www.tiny.cloud/get-tiny/self-hosted/ -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/tinymce/tinymce.min.js"></script>
-    -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@4.3.2/src/js/tinymce/tinymce.min.js"
+        integrity="sha256-OCSy/uzE9FIq9cG6r4RoFpK37HGlr65sxjrfIS30dVE=" crossorigin="anonymous"></script>
 
     <!-- **************************************************************************** -->
     <!-- Resources - Application -->
     <!-- **************************************************************************** -->
 
     <!-- Add CSS resources as you need -->
-    <link rel="stylesheet" href="css/app.bootstrap.guideline.css">
-    <link rel="stylesheet" href="css/app.bootstrap.override.css">
-    <link rel="stylesheet" href="css/app.library.css">
-    <link rel="stylesheet" href="css/app.media.css">
+
+    <!-- guideline.css should be innecessary -->
+    <!--<link rel="stylesheet" href="css/app.bootstrap.guidelines.min.css"> -->
+
+    <link rel="stylesheet" href="css/app.bootstrap.override.css" />
+    <link rel="stylesheet" href="css/app.library.css" />
+    <link rel="stylesheet" href="css/app.media.css" />
+    <link rel="stylesheet" href="../css/api.plugin.css" />
+    <link rel="stylesheet" href="../css/api.plugin.dragndrop.css" />
+
 
     <!-- Add JS resources as you need -->
+
     <script src="js/app.constant.js"></script>
     <script src="js/app.config.js"></script>
-    <script src="js/app.global.js"></script>
     <script src="js/app.plugin.js"></script>
     <script src="js/app.library.js"></script>
 
+
+
+
     <!-- App - PrismJS - 1.17.1 - https://prismjs.com/ -->
     <!-- Download package based on selected themes and languages -->
-
 </head>
 
 <!-- **************************************************************************** -->
@@ -228,14 +378,14 @@
 <!-- **************************************************************************** -->
 
 <body>
-
     <!-- API - Plugin - Return To Top -->
     <a href="#" id="return-to-top">
         <i class="fa fa-chevron-up" aria-hidden="true"></i>
     </a>
 
+    <div id="cookie"></div>
+    <div id="alert"></div>
     <div id="header"></div>
-
     <div id="navigation"></div>
 
     <div class="container-fluid">
@@ -249,14 +399,11 @@
     </div>
 
     <div id="footer"></div>
-
     <div id="modal"></div>
-
     <div id="spinner"></div>
 
     <!-- JS file for Index page-->
     <script src="index.js"></script>
-
 </body>
 
 </html>

@@ -1,0 +1,171 @@
+﻿<!-- Modal - Information-->
+<div id="modal-information" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'><i class='fa fa-info-circle fa-5x text-info'></i></div>
+          <div class='col-12 mt-2'>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+          </div>
+          <div class='col-12 mt-2'><button name="information" class='btn btn-info text-light'>Ok</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Confirm-->
+<div id="modal-confirm" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'>
+            <i name="icon-type" class='fa fa-info-circle fa-5x'></i>
+          </div>
+          <div class='col-12 mt-2'>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+          </div>
+          <div class='col-12 mt-2'>
+            <div class="">
+              <button type="button" class="btn btn-neutral" name="cancel-confirm">
+                <i class="far fa-times-circle"></i> <span label="cancel"></span>
+              </button>
+              <button type="button" class="btn btn-warning" name="confirm">
+                <i class="far fa-check-circle"></i> <span label="confirm"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Success-->
+<div id="modal-success" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'><i class='far fa-check-circle fa-5x text-primary'></i></div>
+          <div class='col-12 mt-2'>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+          </div>
+          <div class='col-12 mt-2'><button name="success" class='btn btn-primary text-light'>Ok</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal - Error-->
+<div id="modal-error" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'><i class='far fa-times-circle fa-5x text-danger'></i></div>
+          <div class='col-12 mt-2'>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+            <div class='col-12 mt-2'><button name="error" class='btn btn-danger text-light'>Ok</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal - Exception-->
+<div id="modal-exception" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'><i class='far fa-times-circle fa-5x text-dark'></i></div>
+          <div class='col-12 mt-2'>
+            <h5>Exception:</h5>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+          </div>
+          <div class='col-12 mt-2'><button name="exception" class='btn btn-dark text-light'>Ok</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Warning-->
+<div id="modal-warning" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class='container-fluid p-5'>
+        <div class='row text-center'>
+          <div class='col-12'><i class='fa fa-exclamation-triangle fa-5x text-warning'></i></div>
+          <div class='col-12 mt-2'>
+            <div class="h4" name="message-text"></div>
+            <div class="h6" name="message-content"></div>
+          </div>
+          <div class='col-12 mt-2'><button name="warning" class='btn btn-warning text-light'>Ok</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal - User - Read -->
+<div id="user-modal-read" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-light" label="user"></h5>
+        <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="border-top border-end border-start row mx-0">
+          <div class="bg-default border-end col-4 p-2 text-end fw-bold"><label label="user-name"></label>
+          </div>
+          <div class="col-8 p-2">
+            <span type="text" name="ccn-username"></span>
+          </div>
+        </div>
+        <div class="border-top border-end border-start row mx-0">
+          <div class="bg-default border-end col-4 p-2 text-end fw-bold"><label label="name"></label>
+          </div>
+          <div class="col-8 p-2">
+            <span type="text" name="ccn-name"></span>
+          </div>
+        </div>
+        <div class="border-top border-end border-start row mx-0">
+          <div class="bg-default border-end col-4 p-2 text-end fw-bold"><label label="email"></label>
+          </div>
+          <div class="col-8 p-2">
+            <span type="text" name="ccn-email"></span>
+          </div>
+        </div>
+        <div class="border-top border-end border-start row mx-0">
+          <div class="bg-default border-end col-4 p-2 text-end fw-bold"><label label="role"></label>
+          </div>
+          <div class="col-8 p-2">
+            <span type="text" name="prv-value"></span>
+          </div>
+        </div>
+        <div class="border-top row mx-0"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-neutral" data-bs-dismiss="modal">
+          <i class="far fa-times-circle"></i> <span label="cancel"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

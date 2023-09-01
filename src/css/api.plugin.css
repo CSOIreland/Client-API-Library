@@ -25,8 +25,8 @@ API - Plugin - Scroll to Top
 
 #return-to-top i {
     position: relative;
-    left: 11px;
-    top: 7px;
+    left: 18%;
+    top: 18%;
     font-size: 2em;
     color: #e6e6e6;
 }
@@ -173,22 +173,22 @@ API - Plugin - Spinner
 }
 
 .item-loader .delay-1 {
-  animation-delay: 1.0s;
-  -webkit-animation-delay: 1.0s;
+  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
 }
 .item-loader .delay-2 {
-  animation-delay: 1.2s;
-  -webkit-animation-delay:1.2s;
+  animation-delay: 0.4s;
+  -webkit-animation-delay:0.4s;
 }
 .item-loader .delay-3 {
-  animation-delay: 1.4s;
-  -webkit-animation-delay: 1.4s;
+  animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
 }
 .item-loader .delay-4 {
-  animation-delay: 1.6s;
-  -webkit-animation-delay: 1.6s;
+  animation-delay: 0.8s;
+  -webkit-animation-delay: 0.8s;
 }
 .item-loader .delay-5 {
-  animation-delay: 1.8s;
-  -webkit-animation-delay: 1.8s;
+  animation-delay: 1.0s;
+  -webkit-animation-delay: 1.0s;
 }

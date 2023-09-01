@@ -3,7 +3,29 @@
         Sample 01
     </div>
     <div class="card-body">
-        <p class="card-text">Some quick example dd text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">Some quick example dd text to build on the card title and make up the bulk of the
+            card's
+            content.</p>
+    </div>
+</div>
+
+<div class="cso-card m-3">
+    <div class="cso-card-header d-flex border-bottom me-1">
+        <span class="ms-3"> Sample CSO Custom Card </span>
+        <div class="ms-auto">
+            <div id="manage-organisation-action-button" class=" mb-1">
+                <button name="button-create" class="btn btn-primary">
+                    <span class=""></span>
+                    <i class="fas fa-plus-circle"></i>
+                    Add button
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Some quick example dd text to build on the card title and make up the bulk of the
+            card's
+            content.</p>
     </div>
 </div>
 
@@ -12,24 +34,25 @@
         <div class="card-header bg-primary text-light">Upload Data</div>
         <div class="card-body">
             <div class="box">
-                <input hidden="true" type="file" name="upload-files[]" class="box__file" />
+                <input hidden="true" type="file" name="upload-files" id="upload-data-file" class="box__file" />
                 <div class="box__input2">
                     <label class="box__input3" for="upload-data-file">
                         <i class="fas fa-upload fa-2x"></i>
-                        <span id="upload-filename"></span>
-                        <span id="upload-filetip">
+                        <span id="upload-file-name"></span>
+                        <span id="upload-file-tip">
                             <strong>Choose a file</strong>
                             <span class="box__dragndrop"> or drag it here.</span>
                         </span>
                     </label>
                 </div>
             </div>
-            <span class="serverValidationError text-danger" name="upload-file-error-holder" id="upload-file-error-holder"></span>
+            <span class="serverValidationError text-danger" name="upload-file-error-holder"
+                id="upload-file-error-holder"></span>
         </div>
         <div class="card-footer text-right">
             <button id="upload-btn-cancel" type="button" class="btn btn-neutral">
                 <i class="fas fa-ban"></i> Cancel</button>
-            <button id="upload-btn-upload" class="btn btn-primary text-light">
+            <button id="upload-btn-upload" type="button" class="btn btn-primary text-light">
                 <i class="far fa-save"></i>
                 Upload
             </button>
@@ -40,4 +63,5 @@
 <!-- Page specific CSS -->
 <link rel="stylesheet" href="entity/sample01/css/sample01.css">
 <!-- Page specific JS -->
+<script src="entity/sample01/js/sample01.library.js"></script>
 <script src="entity/sample01/js/sample01.js"></script>

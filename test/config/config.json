@@ -1,5 +1,11 @@
 {
 	"title": "Title [Dev]",
+	"language": {
+		"iso": {
+			"code": "en",
+			"name": "English"
+		}
+	},
 	"url": {
 		"api": {
 			"public": "https://dev-domain.extension/public/api.jsonrpc",

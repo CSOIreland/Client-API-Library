@@ -153,9 +153,6 @@ api.content.getParam = function (pKey) {
  * @param {*} pAppend 
  */
 api.content.load = function (pSelectorContainer, pRelativeURL, pParams, pAppend) {
- 
-  api.spinner.start();
- 
   // Default parameters
   pParams = pParams || {};
   pAppend = pAppend || false;
@@ -178,12 +175,10 @@ api.content.load = function (pSelectorContainer, pRelativeURL, pParams, pAppend)
       if (pAppend)
         $(pSelectorContainer).append(response).promise().done(function () {
           api.content.params = {};
-          api.spinner.stop();
         });
       else
         $(pSelectorContainer).empty().html(response).promise().done(function () {
           api.content.params = {};
-          api.spinner.stop();
         });
     }
   });
@@ -246,8 +241,6 @@ api.content.navigate = function (pNavSelector, pRelativeURL, pNav_link_SelectorT
  * @param {*} pParams 
  */
 api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_menu_SelectorToHighlight, pParams) {
-  //start the spinner
-  api.spinner.start();  
   // Default parameters
   pNav_link_SelectorToHighlight = pNav_link_SelectorToHighlight || null;
   pNav_menu_SelectorToHighlight = pNav_menu_SelectorToHighlight || null;
@@ -270,7 +263,6 @@ api.content.goTo = function (pRelativeURL, pNav_link_SelectorToHighlight, pNav_m
       api.content.params = pParams;
       $('#body').hide().empty().html(response).fadeIn().promise().done(function () {
         api.content.params = {};
-		api.spinner.stop();
       });
     }
   });
@@ -355,8 +347,9 @@ api.ajax.callback = function (pFunction, pResponse, pParams) {
  * @param {*} pUrl
  * @param {*} pCallback
  * @param {*} pAjaxParams
+ * @param {*} pErrorCallback
  */
-api.ajax.config = function (pUrl, pCallback, pAjaxParams) {
+api.ajax.config = function (pUrl, pCallback, pAjaxParams, pErrorCallback) {
   // Default AJAX parameters
   pAjaxParams = pAjaxParams || {};
   pAjaxParams.method = pAjaxParams.method || 'GET';
@@ -373,6 +366,9 @@ api.ajax.config = function (pUrl, pCallback, pAjaxParams) {
     error: function (jqXHR, textStatus, errorThrown) {
       // Log the issue rather than popping it in a Bootstrap modal because the document may not be ready yet
       console.log("An Internal Server has occurred: the configuration file \"" + pUrl + "\" is missing or invalid.");
+      if (pErrorCallback) {
+        pErrorCallback();
+      }
     }
   };
 
@@ -503,7 +499,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
         api.spinner.stop(pItemSpinner);
 
       // Stop the nav loader
-      $("#nav-loader").removeClass('text-yellow fa-spin').addClass('text-navbar');
+      $("#nav-loader").removeClass('opacity-100').addClass('opacity-0');
       $("body").css("cursor", "default");
     }
   }
@@ -513,7 +509,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
 
   try {
     // Start the nav loader
-    $("#nav-loader").removeClass('text-navbar').addClass('text-yellow fa-spin');
+    $("#nav-loader").removeClass('opacity-0').addClass('opacity-100');
     $("body").css("cursor", "progress");
 
     // Simulate sync behaviour
@@ -537,15 +533,50 @@ API - Library - Modal
 *******************************************************************************/
 api.modal = {};
 
-/**
+ /**
  * Pop a Confirm Modal in Bootstrap
  * @param {*} pMessage 
  * @param {*} pCallbackMethod 
  * @param {*} pCallbackParams 
+ * @param {*} pIconType
+ * @param {*} pShowCancelMessageType
+ * @param {*} pCancelMessage
  */
-api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
+api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconType, pShowCancelMessageDialogType, pCancelMessage) {
   // Set the body of the Modal - Empty the container first
-  $("#modal-confirm").find(".modal-body > p").empty().html(pMessage);
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
+
+  $("#modal-confirm").find('[name=message-content]').empty();
+  $("#modal-confirm").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-confirm").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  let iconType = "";
+  $("#modal-confirm").find("[name=confirm]").removeClass();
+  if (pIconType == 'error') {
+    iconType = 'far fa-times-circle text-danger';
+    $("#modal-confirm").find("[name=confirm]").addClass("btn bg-danger text-light");
+  } else if (pIconType == 'question') {
+    iconType = 'fa fa-question-circle text-primary';
+    $("#modal-confirm").find("[name=confirm]").addClass("btn border-primary bg-primary text-light");
+  } else {
+    iconType = 'fa fa-info-circle text-warning';
+    $("#modal-confirm").find("[name=confirm]").removeClass().addClass("btn bg-warning text-light");
+  }
+
+  $("#modal-confirm").find('[name=icon-type]').removeClass().addClass(iconType + " fa-5x");//.html(iconType);
 
   $("#modal-confirm").find("[name=confirm]").once("click", function () {
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
@@ -556,60 +587,221 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams) {
     });
   });
 
-  // Force the modal to re-initialise before displaying in case of cascade confirm modals
-  $("#modal-confirm").modal();
+  $("#modal-confirm").find("[name=cancel-confirm]").once("click", function () {
+    $("#modal-confirm").modal('hide');
+    if (pShowCancelMessageDialogType == "success") {
+      api.modal.success(pCancelMessage);
+    } else if (pShowCancelMessageDialogType == "warning") {
+      api.modal.warning(pCancelMessage);
+    } else if (pShowCancelMessageDialogType == "information") {
+      api.modal.information(pCancelMessage);
+    } else if (pShowCancelMessageDialogType == "error") {
+      api.modal.error(pCancelMessage);
+    }
+  });
+
+  $("#modal-confirm").modal("show");
 };
+
 
 /**
  * Pop a Success Modal in Bootstrap
  * @param {*} pMessage 
  */
 api.modal.success = function (pMessage) {
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
 
-  // Set the body of the Modal
-  $("#modal-success").find(".modal-body > p").empty().html(pMessage);
+  $("#modal-success").find('[name=message-content]').empty();
+
+  $("#modal-success").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-success").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  $("#modal-success").find("[name=success]").once("click", function () {
+    $('#modal-success').modal('hide');
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  $("#modal-success").on('hidden.bs.modal', function () {
+    $('.modal-hidden').removeClass('d-none');
+  });
 
   // Display the Modal
-  $("#modal-success").modal();
+  $("#modal-success").modal("show");
 };
 
 /**
  * Pop an Error Modal in Bootstrap
- * @param {*} pMessage 
+ * @param {*} pMessage
  */
 api.modal.error = function (pMessage) {
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
 
-  // Set the body of the Modal
-  $("#modal-error").find(".modal-body > p").empty().html(pMessage);
+  if (Array.isArray(msgObj)) {
+    msgObj = msgObj[0];
+  }
+
+  $("#modal-error").find('[name=message-content]').empty();
+  $("#modal-error").find('[name=more-info-content]').addClass('d-none');
+
+  $("#modal-error").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-error").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  $("#modal-error").find("[name=error]").once("click", function () {
+    $('#modal-error').modal('hide');
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  $("#modal-error").on('hidden.bs.modal', function () {
+    $('.modal-hidden').removeClass('d-none');
+  });
 
   // Display the Modal
-  $("#modal-error").modal();
+  $("#modal-error").modal("show");
 };
 
 /**
  * Pop an Information Modal in Bootstrap
- * @param {*} pMessage 
- */
+* @param {*} pMessage
+  */
 api.modal.information = function (pMessage) {
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
 
-  // Set the body of the Modal
-  $("#modal-information").find(".modal-body > p").empty().html(pMessage);
+
+  $("#modal-information").find('[name=message-content]').empty();
+
+  $("#modal-information").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-information").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  $("#modal-information").find("[name=information]").once("click", function () {
+    $('#modal-information').modal('hide');
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  $("#modal-information").on('hidden.bs.modal', function () {
+    $('.modal-hidden').removeClass('d-none');
+  });
+
 
   // Display the Modal
-  $("#modal-information").modal();
+  $("#modal-information").modal("show");
 };
 
 /**
- * Pop an Error Modal in Bootstrap
- * @param {*} pMessage 
- */
-api.modal.exception = function (pMessage) {
+ * Pop an Information Modal in Bootstrap
+* @param {*} pMessage
+  */
+api.modal.warning = function (pMessage) {
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
 
-  // Set the body of the Modal
-  $("#modal-exception").find(".modal-body > p").empty().html(pMessage);
+  $("#modal-warning").find('[name=message-content]').empty();
+
+  $("#modal-warning").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-warning").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  $("#modal-warning").find("[name=warning]").once("click", function () {
+    $('#modal-warning').modal('hide');
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  $("#modal-warning").on('hidden.bs.modal', function () {
+    $('.modal-hidden').removeClass('d-none');
+  });
+
 
   // Display the Modal
-  $("#modal-exception").modal();
+  $("#modal-warning").modal("show");
+};
+
+
+
+/**
+ * Pop an Error Modal in Bootstrap
+* @param {*} pMessage
+  */
+api.modal.exception = function (pMessage) {
+  var msgObj;
+  if (typeof pMessage == "string") {
+    try {
+      msgObj = JSON.parse(pMessage);
+    } catch (ex) {
+      //cant convert to json as is a string
+      msgObj = { 'title': pMessage };
+    }
+  } else {
+    msgObj = pMessage;
+  }
+
+  $("#modal-exception").find('[name=message-content]').empty();
+
+  $("#modal-exception").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('message')) {
+    $("#modal-exception").find('[name=message-content]').empty().html(msgObj.message);
+  }
+
+  $("#modal-exception").find("[name=exception]").once("click", function () {
+    $('#modal-exception').modal('hide');
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  $("#modal-exception").on('hidden.bs.modal', function () {
+    $('.modal-hidden').removeClass('d-none');
+  });
+
+  // Display the Modal
+  $("#modal-exception").modal("show");
 };
 
 
@@ -744,7 +936,7 @@ api.cookie.session.start = function (pLength, pLogoutEnpoint, pLogoutMethod) {
  */
 api.cookie.session.extend = function () {
   // Get the session cookie if any
-  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
+  var data = Cookies.get(C_API_COOKIE_SESSION);
 
   if (data) {
     // Get unix timestamp to deal with numbers rather than dates
@@ -759,7 +951,6 @@ api.cookie.session.extend = function () {
         }),
       api.cookie.session.options);
   }
-
 };
 
 /**
@@ -768,7 +959,7 @@ api.cookie.session.extend = function () {
 api.cookie.session.end = function (logoutEndpoint, logoutMethod) {
   logoutEndpoint = logoutEndpoint || null;
   logoutMethod = logoutMethod || null;
-  var session = Cookies.getJSON(C_API_COOKIE_SESSION);
+  var session = Cookies.get(C_API_COOKIE_SESSION);
   // Run the Logout API
   api.ajax.jsonrpc.request(
     logoutEndpoint || session.logoutEndpoint,
@@ -798,7 +989,7 @@ api.cookie.session.endCallbak = function (data) {
  */
 api.cookie.session.intervalRoutine = function () {
   // Get the session cookie if any
-  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
+  var data = Cookies.get(C_API_COOKIE_SESSION);
   if (!data || $.active) {
     // If no session cookie or any running Ajax, then do nothing
     return;
