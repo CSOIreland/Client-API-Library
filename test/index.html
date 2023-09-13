@@ -20,9 +20,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="image/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="image/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="image/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="image/favicon/site.webmanifest" />
+    <link rel="manifest" href="image/favicon/site.webmanifest" crossorigin="use-credentials" />
     <link rel="mask-icon" href="image/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-    <link rel="shortcut icon" href="test/image/favicon/favicon.ico" />
+    <link rel="shortcut icon" href="image/favicon/favicon.ico" />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="msapplication-config" content="image/favicon/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
@@ -37,12 +37,12 @@
 
     <!-- Bootstrap - https://github.com/twbs/bootstrap/ -->
     <!-- CSOBS-Theme https://github.com/CSOIreland/CSOBSTheme -->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC2/dist/app.bootstrap.guidelines.min.js"
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC3/dist/app.bootstrap.guidelines.min.js"
         integrity="sha256-6cIl2i2aK9ZobLFvHumaxDCEwLQX1Y3c7ajK1sRnfZg=" crossorigin="anonymous"></script>
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC2/dist/app.bootstrap.guidelines.min.css"
-        integrity="sha256-TFAJ/oF6taMRMJRSyEnIMd5eOLC1U5HUOdOBAZKJn4M=" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/app.bootstrap.guidelines.min.css">
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/CSOBSTheme@CSOBSTHEME-RC3/dist/app.bootstrap.guidelines.min.css"
+        integrity="sha256-4HWKQOQJgOfo8TwV9b+FPY6J1xjhuxuoQkxOdCxEIzk=" crossorigin="anonymous">
+
     <!-- URI.js -    https://github.com/medialize/URI.js/ -->
     <script src="https://cdn.jsdelivr.net/npm/urijs@1.19.11/src/URI.min.js"
         integrity="sha256-DERHKoM0qF1q2noFAo0Zz4urfbVg4kTgFyWMMXu6xgQ=" crossorigin="anonymous"></script>
@@ -55,39 +55,40 @@
     <!-- Resources - API -->
     <!-- **************************************************************************** -->
 
-    <script src="../src/js/api.config.js"></script>
-    <script src="../src/js/api.constant.js"></script>
-    <script src="../src/js/api.library.js"></script>
-    <script src="../src/js/api.plugin.dragndrop.js"></script>
-    <script src="../src/js/api.plugin.js"></script>
-
-
     <!-- API Constant -->
-    <!--<script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.constant.min.js"
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/api.constant.min.js"
         integrity="sha256-YvyHbw1yTNvxA3G64LogRzCw7SqaWo37wwUYGDGmiD4=" crossorigin="anonymous"></script>
 
-    <!-- API Configuration ->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.config.min.js"
+    <!-- API Configuration -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/api.config.min.js"
         integrity="sha256-WPGhYSulHDKCrnnthJ4jr1HkUmYmpqXpGEX4nXZAcns=" crossorigin="anonymous"></script>
 
-    <!-- API Library ->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.library.min.js"
-        integrity="sha256-XbBtjzvPGUcvqGF9JMt7gCNUGo70HwYGHvLrx3URPbg=" crossorigin="anonymous"></script>
+    <!-- API Library -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/api.library.min.js"
+        integrity="sha256-AyQ3/MON0z9Dmvo6ex04rRQDhoZdFeWpvZEL7eJfM9U" crossorigin="anonymous"></script>
 
-    <!-- API Plugin ->
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.min.js"
+    <!-- API Plugin -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/api.plugin.min.js"
         integrity="sha256-OX9qnWUyxo+SmLQDBBdjQzdv/QMmMkSFyzQmXgWGxdc=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.min.css"
-        integrity="sha256-20KJRdggsA21vS1Fw+ASrWivQqnw+/9LX2NFpSDtI2k=" crossorigin="anonymous">
-
-    <!-- API Plugin - Drag n Drop ->
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/css/api.plugin.dragndrop.min.css"
-        integrity="sha256-aqNsPNzEyYAGRJcEUm3N85JlxF2xrnwh6yNxQEwTaPc=" crossorigin="anonymous">
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/css/api.plugin.min.css"
+        integrity="sha256-2JCCm9S+rq/ZHbz4pzLGtI7P3i5pkha5nLTM4yagCsw=" crossorigin="anonymous">
 
-    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library/src/js/api.plugin.dragndrop.min.js"
+    <!-- API Plugin - Drag n Drop -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/css/api.plugin.dragndrop.min.css"
+        integrity="sha256-mkgr7Gen+kcIeSlEVKsHxO31/C223WOVrC+bnY8fSlM=" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/api.plugin.dragndrop.min.js"
         integrity="sha256-iRAhcox63wqRJmELabDjJFyFtdwKAR2sNc2AwBC/eBI=" crossorigin="anonymous"></script>
-    -->
+
+    <!-- jquery ui needed for drag and drop-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/dist/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+
+    <!-- TinyMCE - https://www.tiny.cloud/get-tiny/self-hosted/ -->
+    <script src="https://cdn.jsdelivr.net/gh/CSOIreland/Client-API-Library@5.0.0-RC1/src/js/tinymce/tinymce.min.js"
+        integrity="sha256-OCSy/uzE9FIq9cG6r4RoFpK37HGlr65sxjrfIS30dVE=" crossorigin="anonymous"></script>
 
     <!-- **************************************************************************** -->
     <!-- Resurces - App - Dependency -->
@@ -355,8 +356,6 @@
     <link rel="stylesheet" href="css/app.bootstrap.override.css" />
     <link rel="stylesheet" href="css/app.library.css" />
     <link rel="stylesheet" href="css/app.media.css" />
-    <link rel="stylesheet" href="../css/api.plugin.css" />
-    <link rel="stylesheet" href="../css/api.plugin.dragndrop.css" />
 
 
     <!-- Add JS resources as you need -->
