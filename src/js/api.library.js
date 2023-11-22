@@ -533,15 +533,15 @@ API - Library - Modal
 *******************************************************************************/
 api.modal = {};
 
- /**
- * Pop a Confirm Modal in Bootstrap
- * @param {*} pMessage 
- * @param {*} pCallbackMethod 
- * @param {*} pCallbackParams 
- * @param {*} pIconType
- * @param {*} pShowCancelMessageType
- * @param {*} pCancelMessage
- */
+/**
+* Pop a Confirm Modal in Bootstrap
+* @param {*} pMessage 
+* @param {*} pCallbackMethod 
+* @param {*} pCallbackParams 
+* @param {*} pIconType
+* @param {*} pShowCancelMessageType
+* @param {*} pCancelMessage
+*/
 api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconType, pShowCancelMessageDialogType, pCancelMessage) {
   // Set the body of the Modal - Empty the container first
   var msgObj;
@@ -670,6 +670,7 @@ api.modal.error = function (pMessage) {
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-error").find('[name=message-content]').empty().html(msgObj.message);
+    $("#modal-error").find('[name=message-uuid]').empty().html(msgObj.uuid);
   }
 
   $("#modal-error").find("[name=error]").once("click", function () {
@@ -680,6 +681,7 @@ api.modal.error = function (pMessage) {
   $("#modal-error").on('hidden.bs.modal', function () {
     $('.modal-hidden').removeClass('d-none');
   });
+
 
   // Display the Modal
   $("#modal-error").modal("show");
