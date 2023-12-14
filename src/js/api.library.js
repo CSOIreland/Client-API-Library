@@ -534,15 +534,15 @@ API - Library - Modal
 api.modal = {};
 
 /**
-* Pop a Confirm Modal in Bootstrap
-* @param {*} pMessage 
-* @param {*} pCallbackMethod 
-* @param {*} pCallbackParams 
-* @param {*} pIconType
-* @param {*} pShowCancelMessageType
-* @param {*} pCancelMessage
-*/
-api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconType, pShowCancelMessageDialogType, pCancelMessage) {
+      * Pop a Confirm Modal in Bootstrap
+      * @param {*} pMessage 
+      * @param {*} pCallbackMethod 
+      * @param {*} pCallbackParams 
+      * @param {*} pIconType
+      * @param {*} pCancellationCallbackMethod
+      * @param {*} pCancellationCallbackParams
+      */
+api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconType, pCancellationCallbackMethod, pCancellationCallbackParams) {
   // Set the body of the Modal - Empty the container first
   var msgObj;
   if (typeof pMessage == "string") {
@@ -588,16 +588,14 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
   });
 
   $("#modal-confirm").find("[name=cancel-confirm]").once("click", function () {
-    $("#modal-confirm").modal('hide');
-    if (pShowCancelMessageDialogType == "success") {
-      api.modal.success(pCancelMessage);
-    } else if (pShowCancelMessageDialogType == "warning") {
-      api.modal.warning(pCancelMessage);
-    } else if (pShowCancelMessageDialogType == "information") {
-      api.modal.information(pCancelMessage);
-    } else if (pShowCancelMessageDialogType == "error") {
-      api.modal.error(pCancelMessage);
-    }
+    // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
+    $("#modal-confirm").modal('hide').delay(100).queue(function () {
+      // https://stackoverflow.com/questions/10860171/run-function-after-delay
+      if (pCancellationCallbackMethod != null) {
+        pCancellationCallbackMethod(pCancellationCallbackParams);
+        $(this).dequeue();
+      }
+    });
   });
 
   $("#modal-confirm").modal("show");
