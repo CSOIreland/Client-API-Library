@@ -499,7 +499,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
         api.spinner.stop(pItemSpinner);
 
       // Stop the nav loader
-      $("#nav-loader").removeClass('opacity-100').addClass('opacity-0');
+      $("#nav-loader").addClass('invisible');
       $("body").css("cursor", "default");
     }
   }
@@ -509,7 +509,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
 
   try {
     // Start the nav loader
-    $("#nav-loader").removeClass('opacity-0').addClass('opacity-100');
+    $("#nav-loader").removeClass('invisible');
     $("body").css("cursor", "progress");
 
     // Simulate sync behaviour
@@ -664,7 +664,11 @@ api.modal.error = function (pMessage) {
   $("#modal-error").find('[name=message-content]').empty();
   $("#modal-error").find('[name=more-info-content]').addClass('d-none');
 
-  $("#modal-error").find('[name=message-text]').empty().html(msgObj.title);
+  if (typeof pMessage == "object") {
+    $("#modal-error").find('[name=message-text]').empty().html(msgObj);
+  } else {
+    $("#modal-error").find('[name=message-text]').empty().html(msgObj.title);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-error").find('[name=message-content]').empty().html(msgObj.message);
