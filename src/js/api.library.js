@@ -564,21 +564,21 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
   }
 
   let iconType = "";
-  $("#modal-confirm").find("[name=confirm]").removeClass();
+  $("#modal-confirm").find("[name=confirm-btn]").removeClass();
   if (pIconType == 'error') {
     iconType = 'far fa-times-circle text-danger';
-    $("#modal-confirm").find("[name=confirm]").addClass("btn bg-danger text-light");
+    $("#modal-confirm").find("[name=confirm-btn]").addClass("btn btn-danger text-light");
   } else if (pIconType == 'question') {
     iconType = 'fa fa-question-circle text-primary';
-    $("#modal-confirm").find("[name=confirm]").addClass("btn border-primary bg-primary text-light");
+    $("#modal-confirm").find("[name=confirm]").addClass("btn border-primary btn-primary text-light");
   } else {
     iconType = 'fa fa-info-circle text-warning';
-    $("#modal-confirm").find("[name=confirm]").removeClass().addClass("btn bg-warning text-light");
+    $("#modal-confirm").find("[name=confirm]").removeClass().addClass("btn btn-warning");
   }
 
   $("#modal-confirm").find('[name=icon-type]').removeClass().addClass(iconType + " fa-5x");//.html(iconType);
 
-  $("#modal-confirm").find("[name=confirm]").once("click", function () {
+  $("#modal-confirm").find("[name=confirm-btn]").once("click", function () {
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
     $("#modal-confirm").modal('hide').delay(100).queue(function () {
       // https://stackoverflow.com/questions/10860171/run-function-after-delay
