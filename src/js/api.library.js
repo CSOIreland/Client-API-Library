@@ -578,7 +578,7 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
 
   $("#modal-confirm").find('[name=icon-type]').removeClass().addClass(iconType + " fa-5x");//.html(iconType);
 
-  $("#modal-confirm").find("[name=confirm-btn]").once("click", function () {
+  $("#modal-confirm").find("[name=confirm]").once("click", function () {
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
     $("#modal-confirm").modal('hide').delay(100).queue(function () {
       // https://stackoverflow.com/questions/10860171/run-function-after-delay
