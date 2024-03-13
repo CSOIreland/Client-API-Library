@@ -918,9 +918,8 @@ api.cookie.session.confirmExtension = function () { };
 api.cookie.session.start = function (pLength, pLogoutEnpoint, pLogoutMethod) {
   // Get unix timestamp to deal with numbers rather than dates
   var timestamp = Math.round(new Date().getTime() / 1000);
-
   // Set the Session Cookie
-  Cookies.set(
+  Cookies.setJSON(
     C_API_COOKIE_SESSION,
     $.extend(true, {}, api.cookie.session.data,
       {
@@ -940,13 +939,13 @@ api.cookie.session.start = function (pLength, pLogoutEnpoint, pLogoutMethod) {
  */
 api.cookie.session.extend = function () {
   // Get the session cookie if any
-  var data = Cookies.get(C_API_COOKIE_SESSION);
+  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
 
   if (data) {
     // Get unix timestamp to deal with numbers rather than dates
     var timestamp = Math.round(new Date().getTime() / 1000);
     // Extend Session Cookie 
-    Cookies.set(
+    Cookies.setJSON(
       C_API_COOKIE_SESSION,
       $.extend(true, {}, data,
         {
@@ -963,7 +962,7 @@ api.cookie.session.extend = function () {
 api.cookie.session.end = function (logoutEndpoint, logoutMethod) {
   logoutEndpoint = logoutEndpoint || null;
   logoutMethod = logoutMethod || null;
-  var session = Cookies.get(C_API_COOKIE_SESSION);
+  var session = Cookies.getJSON(C_API_COOKIE_SESSION);
   // Run the Logout API
   api.ajax.jsonrpc.request(
     logoutEndpoint || session.logoutEndpoint,
@@ -993,7 +992,7 @@ api.cookie.session.endCallbak = function (data) {
  */
 api.cookie.session.intervalRoutine = function () {
   // Get the session cookie if any
-  var data = Cookies.get(C_API_COOKIE_SESSION);
+  var data = Cookies.getJSON(C_API_COOKIE_SESSION);
   if (!data || $.active) {
     // If no session cookie or any running Ajax, then do nothing
     return;
