@@ -9,7 +9,6 @@ Cookies.setJSON = function (cookieName, data, cookieOptions) {
 
 Cookies.getJSON = function (cookieName) {
     var cookieValue = Cookies.get(cookieName);
-    debugger
     if (cookieValue) {
         return JSON.parse(cookieValue)
     }
