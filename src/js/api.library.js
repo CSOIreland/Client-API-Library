@@ -549,18 +549,26 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
     try {
       msgObj = JSON.parse(pMessage);
     } catch (ex) {
-      //cant convert to json as is a string
-      msgObj = { 'title': pMessage };
+      //leave the message as it is
+      msgObj = pMessage;
     }
   } else {
+    //leave the message as it is
     msgObj = pMessage;
   }
 
-  $("#modal-confirm").find('[name=message-content]').empty();
-  $("#modal-confirm").find('[name=message-text]').empty().html(msgObj.title);
+  if (msgObj.hasOwnProperty('title')) {
+    //for alternative modal 
+    $("#modal-confirm").find('[name=message-text]').empty().html(msgObj.title);
+  }
+  else {
+    $("#modal-confirm").find('[name=message-text]').empty().html(msgObj);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-confirm").find('[name=message-content]').empty().html(msgObj.message);
+  } else {
+    $("#modal-confirm").find('[name=message-content]').empty();
   }
 
   let iconType = "";
@@ -576,7 +584,7 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
     $("#modal-confirm").find("[name=confirm]").removeClass().addClass("btn btn-warning");
   }
 
-  $("#modal-confirm").find('[name=icon-type]').removeClass().addClass(iconType + " fa-5x");//.html(iconType);
+  $("#modal-confirm").find('[name=icon-type]').removeClass().addClass(iconType + " fa-5x");
 
   $("#modal-confirm").find("[name=confirm]").once("click", function () {
     // Must wait for the async transition to finsh before invoking the callback function that may be a cascade confirm
@@ -612,19 +620,26 @@ api.modal.success = function (pMessage) {
     try {
       msgObj = JSON.parse(pMessage);
     } catch (ex) {
-      //cant convert to json as is a string
-      msgObj = { 'title': pMessage };
+      //leave the message as it is
+      msgObj = pMessage;
     }
   } else {
+    //leave the message as it is
     msgObj = pMessage;
   }
 
-  $("#modal-success").find('[name=message-content]').empty();
-
-  $("#modal-success").find('[name=message-text]').empty().html(msgObj.title);
+  if (msgObj.hasOwnProperty('title')) {
+    //for alternative modal 
+    $("#modal-success").find('[name=message-text]').empty().html(msgObj.title);
+  }
+  else {
+    $("#modal-success").find('[name=message-text]').empty().html(msgObj);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-success").find('[name=message-content]').empty().html(msgObj.message);
+  } else {
+    $("#modal-success").find('[name=message-content]').empty();
   }
 
   $("#modal-success").find("[name=success]").once("click", function () {
@@ -699,20 +714,26 @@ api.modal.information = function (pMessage) {
     try {
       msgObj = JSON.parse(pMessage);
     } catch (ex) {
-      //cant convert to json as is a string
-      msgObj = { 'title': pMessage };
+      //leave the message as it is
+      msgObj = pMessage;
     }
   } else {
+    //leave the message as it is
     msgObj = pMessage;
   }
 
-
-  $("#modal-information").find('[name=message-content]').empty();
-
-  $("#modal-information").find('[name=message-text]').empty().html(msgObj.title);
+  if (msgObj.hasOwnProperty('title')) {
+    //for alternative modal 
+    $("#modal-information").find('[name=message-text]').empty().html(msgObj.title);
+  }
+  else {
+    $("#modal-information").find('[name=message-text]').empty().html(msgObj);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-information").find('[name=message-content]').empty().html(msgObj.message);
+  } else {
+    $("#modal-information").find('[name=message-content]').empty();
   }
 
   $("#modal-information").find("[name=information]").once("click", function () {
@@ -723,7 +744,6 @@ api.modal.information = function (pMessage) {
   $("#modal-information").on('hidden.bs.modal', function () {
     $('.modal-hidden').removeClass('d-none');
   });
-
 
   // Display the Modal
   $("#modal-information").modal("show");
@@ -739,19 +759,26 @@ api.modal.warning = function (pMessage) {
     try {
       msgObj = JSON.parse(pMessage);
     } catch (ex) {
-      //cant convert to json as is a string
-      msgObj = { 'title': pMessage };
+      //leave the message as it is
+      msgObj = pMessage;
     }
   } else {
+    //leave the message as it is
     msgObj = pMessage;
   }
 
-  $("#modal-warning").find('[name=message-content]').empty();
-
-  $("#modal-warning").find('[name=message-text]').empty().html(msgObj.title);
+  if (msgObj.hasOwnProperty('title')) {
+    //for alternative modal 
+    $("#modal-warning").find('[name=message-text]').empty().html(msgObj.title);
+  }
+  else {
+    $("#modal-warning").find('[name=message-text]').empty().html(msgObj);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-warning").find('[name=message-content]').empty().html(msgObj.message);
+  } else {
+    $("#modal-warning").find('[name=message-content]').empty();
   }
 
   $("#modal-warning").find("[name=warning]").once("click", function () {
@@ -763,12 +790,9 @@ api.modal.warning = function (pMessage) {
     $('.modal-hidden').removeClass('d-none');
   });
 
-
   // Display the Modal
   $("#modal-warning").modal("show");
 };
-
-
 
 /**
  * Pop an Error Modal in Bootstrap
@@ -780,19 +804,28 @@ api.modal.exception = function (pMessage) {
     try {
       msgObj = JSON.parse(pMessage);
     } catch (ex) {
-      //cant convert to json as is a string
-      msgObj = { 'title': pMessage };
+      //leave the message as it is
+      msgObj = pMessage;
     }
   } else {
+    //leave the message as it is
     msgObj = pMessage;
   }
 
-  $("#modal-exception").find('[name=message-content]').empty();
 
-  $("#modal-exception").find('[name=message-text]').empty().html(msgObj.title);
+
+  if (msgObj.hasOwnProperty('title')) {
+    //for alternative modal 
+    $("#modal-exception").find('[name=message-text]').empty().html(msgObj.title);
+  }
+  else {
+    $("#modal-exception").find('[name=message-text]').empty().html(msgObj);
+  }
 
   if (msgObj.hasOwnProperty('message')) {
     $("#modal-exception").find('[name=message-content]').empty().html(msgObj.message);
+  } else {
+    $("#modal-exception").find('[name=message-content]').empty();
   }
 
   $("#modal-exception").find("[name=exception]").once("click", function () {
