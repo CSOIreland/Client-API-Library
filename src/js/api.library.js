@@ -601,8 +601,8 @@ api.modal.confirm = function (pMessage, pCallbackMethod, pCallbackParams, pIconT
       // https://stackoverflow.com/questions/10860171/run-function-after-delay
       if (pCancellationCallbackMethod != null) {
         pCancellationCallbackMethod(pCancellationCallbackParams);
-        $(this).dequeue();
       }
+      $(this).dequeue();
     });
   });
 
