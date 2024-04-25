@@ -393,8 +393,10 @@ api.ajax.jsonrpc = {};
  * @param {*} callbackFunctionName_onError 
  * @param {*} callbackParams_onError 
  * @param {*} pAJAX_Params 
+ * @param {*} pItemSpinner
+ * @param {*} pHideSuccessErrorModal
  */
-api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner = null) {
+api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner = null, pHideSuccessErrorModal = false) {
   // Default API parameters
   pAPI_Params = pAPI_Params || {};
 
@@ -442,39 +444,44 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
       }
 
       if (response.error) {
-        // Init the erro output
-        var errorOutput = null;
+        if (!pHideSuccessErrorModal) {
+          // Init the error output
+          var errorOutput = null;
 
-        // Check response.error.data exist
-        if (response.error.data) {
-          // Format the structured data, either array or object
-          if (($.isArray(response.error.data) && response.error.data.length)
-            || ($.isPlainObject(response.error.data) && !$.isEmptyObject(response.error.data))) {
-            errorOutput = $("<ul>", {
-              class: "list-group"
-            });
-            $.each(response.error.data, function (_index, value) {
-              var error = $("<li>", {
-                class: "list-group-item",
-                html: value.toString()
+          // Check response.error.data exist
+          if (response.error.data) {
+            // Format the structured data, either array or object
+            if (($.isArray(response.error.data) && response.error.data.length)
+              || ($.isPlainObject(response.error.data) && !$.isEmptyObject(response.error.data))) {
+              errorOutput = $("<ul>", {
+                class: "list-group"
               });
-              errorOutput.append(error);
-            });
-          } else
-            // Plain error
-            errorOutput = response.error.data;
-        } else {
-          // Get the simple message otherwise
-          errorOutput = response.error.message;
+              $.each(response.error.data, function (_index, value) {
+                var error = $("<li>", {
+                  class: "list-group-item",
+                  html: value.toString()
+                });
+                errorOutput.append(error);
+              });
+            } else
+              // Plain error
+              errorOutput = response.error.data;
+          } else {
+            // Get the simple message otherwise
+            errorOutput = response.error.message;
+          }
+
+          // Pop the error in the Bootstrap Modal
+          api.modal.error(errorOutput);
         }
 
-        // Pop the error in the Bootstrap Modal
-        api.modal.error(errorOutput);
 
         if (callbackFunctionName_onError) {
           api.ajax.callback(callbackFunctionName_onError, response.error, callbackParams_onError);
         }
-      } else if (response.result !== undefined) {
+      }
+
+      else if (response.result !== undefined) {
         // Check if the response.result property exist
         if (callbackFunctionName_onSuccess)
           api.ajax.callback(callbackFunctionName_onSuccess, response.result, callbackParams_onSuccess);
