@@ -666,7 +666,12 @@ api.modal.success = function (pMessage) {
  * Pop an Error Modal in Bootstrap
  * @param {*} pMessage
  */
+/**
+ * Pop an Error Modal in Bootstrap
+ * @param {*} pMessage
+ */
 api.modal.error = function (pMessage) {
+
   var msgObj;
   if (typeof pMessage == "string") {
     try {
@@ -687,7 +692,11 @@ api.modal.error = function (pMessage) {
   $("#modal-error").find('[name=more-info-content]').addClass('d-none');
 
   if (typeof pMessage == "object") {
-    $("#modal-error").find('[name=message-text]').empty().html(msgObj);
+    if (msgObj.hasOwnProperty('title')) {
+      $("#modal-error").find('[name=message-text]').empty().html(msgObj.title);
+    } else {
+      $("#modal-error").find('[name=message-text]').empty().html(msgObj);
+    }
   } else {
     $("#modal-error").find('[name=message-text]').empty().html(msgObj.title);
   }
