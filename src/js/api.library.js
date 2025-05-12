@@ -396,7 +396,14 @@ api.ajax.jsonrpc = {};
  * @param {*} pItemSpinner
  * @param {*} pHideSuccessErrorModal
  */
+
 api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner = null, pHideSuccessErrorModal = false) {
+  //call the async function to handle catch block of acquiretokensilently
+  api.ajax.jsonrpc.processRequestAsync(pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner, pHideSuccessErrorModal)
+}
+
+
+api.ajax.jsonrpc.processRequestAsync = async function (pAPI_URL, pAPI_Method, pAPI_Params, callbackFunctionName_onSuccess, callbackParams_onSuccess, callbackFunctionName_onError, callbackParams_onError, pAJAX_Params, pItemSpinner = null, pHideSuccessErrorModal = false) {
   // Default API parameters
   pAPI_Params = pAPI_Params || {};
 
@@ -429,6 +436,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     "params": pAPI_Params,
     "id": callID
   };
+
 
   // Extend AJAX Parameters
   var extendedAJAXParams = {
@@ -511,10 +519,24 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     }
   }
 
-  // Merge pAJAX_Params into extendedAJAXParams
-  $.extend(extendedAJAXParams, pAJAX_Params);
+
+  let headers = pAJAX_Params.headers || {};
+
 
   try {
+    //force to wait for return
+    const token = await api.sso.acquireAccessTokenSilently(pAPI_Method);
+
+    if (token) {
+      headers["MSAL"] = `Bearer ${token}`;
+    }
+
+    // Inject headers into AJAX params
+    extendedAJAXParams.headers = headers;
+
+    // Merge pAJAX_Params after injecting headers to avoid overwrite
+    $.extend(true, extendedAJAXParams, pAJAX_Params);
+
     // Start the nav loader
     $("#nav-loader").removeClass('invisible');
     $("body").css("cursor", "progress");
@@ -528,7 +550,7 @@ api.ajax.jsonrpc.request = function (pAPI_URL, pAPI_Method, pAPI_Params, callbac
     // Make the Ajax call
     return $.ajax(extendedAJAXParams);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     // Pop the exception in the Bootstrap Modal
     api.modal.exception("An unhandled Ajax exception has occurred. Please try again.");
     return false;
@@ -1059,3 +1081,225 @@ api.cookie.session.intervalRoutine = function () {
     // The session is valid, do nothing
   }
 };
+
+
+/*******************************************************************************
+API - Library - Single Sign On
+*******************************************************************************/
+api.sso = {};
+api.sso.msalConfigObj = {};
+api.sso.msalInstance = null;
+api.sso.tokenPromise = null;
+
+//temporary, to be removed
+api.sso.response = null;
+
+api.sso.authenticateUserSilently = function (callbackFunctionName_onSuccess, callbackFunctionName_onError, hideLoginPopup) {
+  api.spinner.start();
+
+  hideLoginPopup = hideLoginPopup || false;
+
+  let loginRequest = {
+    scopes: ["api://" + api.sso.msalConfigObj.auth.clientId + "/access_application"]
+  };
+  
+  api.sso.msalInstance.ssoSilent(loginRequest).then((response) => {
+    api.spinner.stop();
+    //User logged in successfully
+
+    console.log(response.accessToken)
+    /*   console.log("expiresOn : " + response.expiresOn);
+      console.log("extExpiresOn : " + response.extExpiresOn);
+      console.log("FIRST");
+  */
+
+    api.sso.response = response;
+
+
+    api.ajax.callback(callbackFunctionName_onSuccess, response);
+  }).catch(error => {
+    api.spinner.stop();
+    console.log("Silent Error: " + error);
+
+    if (hideLoginPopup) {
+      //Error during login
+      if (callbackFunctionName_onError != null) {
+        api.ajax.callback(callbackFunctionName_onError, error);
+      }
+    } else if (error instanceof msal.InteractionRequiredAuthError) {
+      //if the error indicates interaction is required, fallback to login
+      console.log("SSO Silent requires interation. prompting login....")
+      api.sso.authenticateUserPopup(callbackFunctionName_onSuccess, callbackFunctionName_onError);
+    } else {
+      //Error during login
+      if (callbackFunctionName_onError != null) {
+        api.ajax.callback(callbackFunctionName_onError, error);
+      }
+    }
+  });
+};
+
+
+/**
+ * call to entra ID to authenticate the user with popup
+ * @param {*} callbackFunctionName_onSuccess
+ * @param {*} callbackFunctionName_onError
+ */
+api.sso.authenticateUserPopup = function (callbackFunctionName_onSuccess, callbackFunctionName_onError) {
+  console.log("authenticateUserPopup");
+  let loginRequest = {
+    scopes: ["api://" + api.sso.msalConfigObj.auth.clientId + "/access_application"]
+  };
+  api.spinner.start();
+  api.sso.msalInstance.loginPopup(loginRequest)
+    .then((response) => {
+      //User logged in successfully
+      api.spinner.stop();
+      console.log(response.accessToken)
+      //// api.idle.startIdleTimer();
+      api.ajax.callback(callbackFunctionName_onSuccess, response);
+    })
+    .catch(error => {
+      api.spinner.stop();
+      console.log("login failed:", error);
+      //Error during login
+      api.ajax.callback(callbackFunctionName_onError, error);
+    });
+}
+
+/**
+ * call to entra ID to authenticate the user with popup
+ * @param {*} callbackFunctionName_onSuccess
+ * @param {*} callbackFunctionName_onError
+ */
+api.sso.authenticateUserPopupAsync = async function () {
+  console.log("authenticateUserPopup");
+  let loginRequest = {
+    scopes: ["api://" + api.sso.msalConfigObj.auth.clientId + "/access_application"]
+  };
+
+  try {
+    return await api.sso.msalInstance.loginPopup(loginRequest);
+  } catch (error) {
+    console.log("login failed:", error);
+    // Error during login
+    return null;
+  }
+
+}
+
+/**
+ * call to entra ID to logout the user with popup
+ * @param {*} callbackFunctionName_onSuccess 
+ * @param {*} callbackFunctionName_onError 
+ */
+api.sso.logout = function (callbackFunctionName_onSuccess, callbackFunctionName_onError) {
+  // Default callback functions
+  callbackFunctionName_onSuccess = callbackFunctionName_onSuccess || null;
+  callbackFunctionName_onError = callbackFunctionName_onError || null;
+  // you can select which account application should sign out
+  const logoutRequest = {
+    account: api.sso.getMsalAccount()
+  };
+  api.sso.msalInstance.logoutPopup(logoutRequest)
+    .then(() => {
+      if (callbackFunctionName_onSuccess) {
+        api.ajax.callback(callbackFunctionName_onSuccess);
+      }
+
+    })
+    .catch((error) => {
+      if (callbackFunctionName_onError) {
+        api.ajax.callback(callbackFunctionName_onError, error);
+      }
+    });
+};
+
+
+/**
+ * check if the user has an entra account and retrieve token if present
+ * @param {*} pAPI_Method
+ */
+api.sso.acquireAccessTokenSilently = function (pAPI_Method) {
+
+  console.log("get access token silently");
+
+  const validAccount = api.sso.getMsalAccount();
+
+  if (validAccount) {
+    // Set the first account as the active account
+    api.sso.msalInstance.setActiveAccount(validAccount);
+  } else {
+    // Handle the case where no account is signed in
+    return null; // Promise.reject("No account signed in");
+  }
+
+  console.log(api.sso.tokenPromise);
+
+  // If token request is already in progress, reuse it
+  if (api.sso.tokenPromise) return api.sso.tokenPromise;
+
+  let scope = ["api://" + api.sso.msalConfigObj.auth.clientId + "/access_application"];
+
+  /***
+   *
+   *
+   *
+   * to test the catch block
+    * api.sso.tokenPromise = Promise.reject(new msal.InteractionRequiredAuthError("Simulated error"))
+    *
+    *
+    */
+
+  api.sso.tokenPromise = api.sso.msalInstance.acquireTokenSilent({
+    scopes: scope,
+    account: api.sso.msalInstance.getActiveAccount(),
+    forceRefresh: true
+  }).then((response) => {
+    // User is authenticated, return access token
+    api.sso.tokenPromise = null; // clear cache
+    console.log(response.expiresOn);
+    console.log("finished2 =>" + pAPI_Method);
+
+    return response.accessToken;
+  }).catch(async (error) => {
+    if (error instanceof msal.InteractionRequiredAuthError) {
+      const response = await api.sso.authenticateUserPopupAsync();
+      api.sso.tokenPromise = null;
+      if (response.accessToken) {
+        return response.accessToken;
+      } else {
+        return null
+      }
+    } else {
+      api.sso.tokenPromise = null;
+      return null
+    }
+  });
+
+  console.log("finished1 =>" + pAPI_Method);
+  return api.sso.tokenPromise;
+}
+
+/**
+ * 
+ * 
+ * gets msalAccount for the application
+ */
+api.sso.getMsalAccount = function () {
+
+  if (api.sso.msalInstance == null) {
+    return null;
+  }
+
+  // Get all accounts
+  const accounts = api.sso.msalInstance.getAllAccounts();
+
+  //get the valid account
+  const validAccount = accounts.find(account => {
+    const idTokenClaims = account.idTokenClaims;
+    return idTokenClaims && idTokenClaims.aud === api.sso.msalConfigObj.auth.clientId;
+  });
+
+  return validAccount;
+}
