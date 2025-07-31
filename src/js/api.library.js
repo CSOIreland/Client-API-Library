@@ -1276,7 +1276,6 @@ api.sso.getMsalAccount = function () {
  * @param {*} callbackFunctionName_onError 
  */
 api.sso.createMsalInstance = function (callbackFunctionName_onSuccess, callbackFunctionName_onError) {
-  debugger;
   msal.PublicClientApplication.createPublicClientApplication(api.sso.msalConfigObj)
     .then((obj) => {
       api.sso.msalInstance = obj;
