@@ -1190,6 +1190,13 @@ api.sso.logout = function (callbackFunctionName_onSuccess, callbackFunctionName_
     });
 };
 
+/**
+ * function to optionally override in local application
+ * @param {*} accessToken 
+ * @param {*} expiresOn 
+ * @param {*} domain 
+ */
+api.sso.setMsalCookieOverride = function (accessToken, expiresOn, domain) { };
 
 /**
  * check if the user has an entra account and retrieve token if present
@@ -1228,12 +1235,17 @@ api.sso.acquireAccessTokenSilently = async function () {
   }).then((response) => {
     // User is authenticated, return access token
     api.sso.tokenPromise = null; // clear cache i.e. mark the promise as complete
+    //put access token into domain cookie
+    api.sso.setMsalCookieOverride(response.accessToken, response.expiresOn);
+
     return response.accessToken;
   }).catch(async (error) => {
     if (error instanceof msal.InteractionRequiredAuthError) {
       const response = await api.sso.authenticateUserPopupAsync();
       api.sso.tokenPromise = null;
       if (response.accessToken) {
+        //put access token into domain cookie
+        api.sso.setMsalCookieOverride(response.accessToken, response.expiresOn);
         return response.accessToken;
       } else {
         return null
